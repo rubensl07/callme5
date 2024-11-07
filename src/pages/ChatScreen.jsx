@@ -1,71 +1,72 @@
 import React from 'react'
-import '../css/ChatScreen.css'
+import styles from '../css/ChatScreen.module.css'
 import Sidebar from '../components/Sidebar'
 
 const ChatScreen = () => {
+  const imgSrcTeste = "../img/Icon.png"
   return (
 
-    <div className="chat-container">
+    <div className={styles.chatContainer}>
 
       <Sidebar />
 
-      <div className="sidebar">  
+      <div className={styles.sidebar}>  
             
-      <div className="choiceRow">
+      <div className={styles.choiceRow}>
         <h2> Conversas </h2>
         <h2> Prioridades </h2>
       </div>
 
-        <div className="sidebar-item">
-          <img src="/img/Icon.png" alt="Luana Santos" className="profile-pic" />
-          <span className="username">Luana Santos</span>
+        <div className={styles.sidebarItem}>
+          <img src={imgSrcTeste} alt="Luana Santos" className={styles.profilePic} />
+          <span className={styles.username}>Luana Santos</span>
         </div>
-        <div className="sidebar-item">
-          <img src="/img/Icon.png" alt="Luis Souza" className="profile-pic" />
-          <span className="username">Luis Souza</span>
-          <span className="notification-badge">2</span>
+        <div className={styles.sidebarItem}>
+          <img src={imgSrcTeste} alt="Luis Souza" className={styles.profilePic} />
+          <span className={styles.username}>Luis Souza</span>
+          <span className={styles.notificationBadge}>2</span>
         </div>
-        <div className="sidebar-item">
-          <img src="/img/Icon.png" alt="Rubens Santos" className="profile-pic" />
-          <span className="username">Rubens Santos</span>
-          <span className="notification-badge">5</span>
+        <div className={styles.sidebarItem}>
+          <img src={imgSrcTeste} alt="Rubens Santos" className={styles.profilePic} />
+          <span className={styles.username}>Rubens Santos</span>
+          <span className={styles.notificationBadge}>5</span>
         </div>
-        <div className="sidebar-item">
-          <img src="/img/Icon.png" alt="Giovanna Cavalcante" className="profile-pic" />
-          <span className="username">Giovanna Cavalcante</span>
+        <div className={styles.sidebarItem}>
+          <img src={imgSrcTeste} alt="Giovanna Cavalcante" className={styles.profilePic} />
+          <span className={styles.username}>Giovanna Cavalcante</span>
         </div>
       </div>
 
-      <div className="chat-section">
-        <div className="chat-header">
-          <img src="/img/Icon.png" alt="Giovanna Belo" className="header-profile-pic" />
-          <span className="header-username">Giovanna Belo</span>
-          <span className="status">Online</span>
-          <div className="header-options">
-            <button className="call-btn">📞</button>
-            <button className="video-btn">📹</button>
-            <span className="timer">3:19</span>
-            <button className="close-btn">❌</button>
+      <div className={styles.chatSection}>
+        <div className={styles.chatHeader}>
+          <img src={imgSrcTeste} alt="Giovanna Belo" className={styles.headerProfilePic} />
+          <span className={styles.headerUsername}>Giovanna Belo</span>
+          <span className={styles.status}>Online</span>
+          <div className={styles.headerOptions}>
+            <button className={styles.callBtn}>📞</button>
+            <button className={styles.videoBtn}>📹</button>
+            <span className={styles.timer}>3:19</span>
+            <button className={styles.closeBtn}>❌</button>
           </div>
         </div>
 
-        <div className="chat-body">
-          <div className="message incoming">
+        <div className={styles.chatBody}>
+          <div className={`${styles.message} ${styles.incoming}`}>
             <p>A vida é muito triste</p>
           </div>
-          <div className="message-response">
+          <div className={styles.messageResponse}>
             <p>Mensagem a caminho! <br />  Assim que o psicólogo puder, ele vai te dar um toque!</p>
           </div>
         </div>
 
-        <div className="chat-actions">
-          <button className="delete-request">Excluir solicitação</button>
-          <button className="accept-request">Aceitar solicitação</button>
+        <div className={styles.chatActions}>
+          <button className={styles.deleteRequest}>Excluir solicitação</button>
+          <button className={styles.acceptRequest}>Aceitar solicitação</button>
         </div>
 
-        <div className="chat-input">
+        <div className={styles.chatInput}>
           <input type="text" placeholder="O que está acontecendo?" />
-          <button className="send-btn">➤</button>
+          <button className={styles.sendBtn}>➤</button>
         </div>
       </div>
     </div>

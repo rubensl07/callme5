@@ -1,4 +1,4 @@
-.chat-container {
+.chatContainer {
     display: flex;
     height: 100vh;
     background: linear-gradient(to bottom, #EDF4FF, #BDDEFF);
@@ -8,13 +8,13 @@
     width: 25%;
 }
 
-.sidebar-item {
+.sidebarItem {
     display: flex;
     align-items: center;
     height: 10%;
 }
 
-.profile-pic {
+.profilePic {
     width: 15%;
     height: 70%;
     border-radius: 50%;
@@ -36,7 +36,7 @@
     color: #215CB9;
 }
 
-.notification-badge {
+.notificationBadge {
     background-color: #f44336;
     color: white;
     border-radius: 50%;
@@ -45,7 +45,7 @@
     height: 25%;
 }
 
-.chat-section {
+.chatSection {
     width: 75%;
     display: flex;
     flex-direction: column;
@@ -53,18 +53,18 @@
     border-left: 5px solid #3758C3;
 }
 
-.chat-header {
+.chatHeader {
     display: flex;
     align-items: center;
     padding: 20px;
     color: #2754B2;
 }
 
-.header-profile-pic {
+.headerProfilePic {
     margin-right: 20px;
 }
 
-.header-username {
+.headerUsername {
     font-weight: bold;
     font-size: 30px;
 }
@@ -76,15 +76,15 @@
     margin-top: 5px;
 }
 
-.header-options {
+.headerOptions {
     margin-left: auto;
     display: flex;
     align-items: center;
 }
 
-.call-btn,
-.video-btn,
-.close-btn {
+.callBtn,
+.videoBtn,
+.closeBtn {
     border: none;
     color: white;
     font-size: 30px;
@@ -96,7 +96,7 @@
     margin-left: 10px;
 }
 
-.chat-body {
+.chatBody {
     flex: 1;
     padding: 20px;
     background: none;
@@ -107,7 +107,7 @@
     background-color: #85A3DC;
 }
 
-.message-response {
+.messageResponse {
     margin-top: 150px;
     width: 60vw;
     height: 10vh;
@@ -121,7 +121,7 @@
     margin-left: 6%;
 }
 
-.chat-actions {
+.chatActions {
     display: flex;
     justify-content: center;
     padding: 10px;
@@ -129,8 +129,8 @@
     margin-bottom: 27%;
 }
 
-.delete-request,
-.accept-request {
+.deleteRequest,
+.acceptRequest {
     padding: 10px 20px;
     margin: 0 10px;
     cursor: pointer;
@@ -140,21 +140,21 @@
     width: 30vw;
 }
 
-.delete-request {
+.deleteRequest {
     background-color: #2754B2;
     color: white;
     font-size: xx-large;
     font-weight: 600;
 }
 
-.accept-request {
+.acceptRequest {
     background-color: #64b5f6;
     color: #2754B2;
     font-size: xx-large;
     font-weight: 700;
 }
 
-.chat-input {
+.chatInput {
     display: flex;
     align-items: center;
     padding: 10px;
@@ -165,7 +165,7 @@
     margin-left: 5%;
 }
 
-.chat-input input {
+.chatInput input {
     flex: 1;
     padding: 10px;
     border-radius: 100px;
@@ -176,7 +176,7 @@
     font-weight: 600;
 }
 
-.send-btn {
+.sendBtn {
     background-color: #2196f3;
     color: white;
     padding: 10px;

@@ -93,6 +93,13 @@ export async function postProfissional(dados) {
   }
 }
 
+export async function getAutoajuda(){
+  const url = `${link}/autoajudas`
+  const response = await fetch(url)
+  const data = await response.json()
+  return data.dados
+}
+
 export async function validateLogin(dados) {
     const url = `${link}/login`;
   
