@@ -1,0 +1,25 @@
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    margin: 5%;
+    background: none;
+}
+
+li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.usuario-nota {
+    color: black;
+    text-align: center;
+    font-size: xx-large;
+    font-weight: 500;
+}

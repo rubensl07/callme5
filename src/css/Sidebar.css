@@ -1,0 +1,104 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.menu {
+  height: 85vh;
+  width: 7%;
+  margin-top: 7.2%;
+  margin-right: 93%;
+  background-color: #1F55C6;
+  border-radius: 100px 100px 0px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  z-index: 10;
+}
+
+.notas {
+  width: 130px;
+  height: 130px;
+  background-color: #7FB3FF;
+  border-radius: 100%;
+  border: #7FB3FF;
+  display: flex;
+  justify-content: center;
+  margin-top: 70%;
+  margin-left: 25%;
+  align-items: center;
+}
+
+.iconNota {
+  height: 40%;
+}
+
+.chat {
+  width: 130px;
+  height: 130px;
+  background-color: #7FB3FF;
+  border-radius: 100%;
+  border: #7FB3FF;
+  display: flex;
+  justify-content: center;
+  margin-top: 50%;
+  margin-left: 25%;
+  align-items: center;
+}
+
+.iconChat {
+  height: 40%;
+}
+
+.autoajuda {
+  width: 130px;
+  height: 130px;
+  background-color: #7FB3FF;
+  border-radius: 100%;
+  border: #7FB3FF;
+  display: flex;
+  justify-content: center;
+  margin-top: 50%;
+  margin-left: 25%;
+  align-items: center;
+}
+
+.iconAutoajuda {
+  height: 40%;
+}
+
+.estatistica {
+  width: 130px;
+  height: 130px;
+  background-color: #7FB3FF;
+  border-radius: 100%;
+  border: #7FB3FF;
+  display: flex;
+  justify-content: center;
+  margin-top: 50%;
+  margin-left: 25%;
+  align-items: center;
+}
+
+.iconEstatistica {
+  height: 40%;
+}
+
+.doacao {
+  width: 130px;
+  height: 130px;
+  background-color: #7FB3FF;
+  border-radius: 100%;
+  border: #7FB3FF;
+  display: flex;
+  justify-content: center;
+  margin-top: 50%;
+  margin-left: 25%;
+  align-items: center;
+}
+
+.iconDoacao {
+  height: 40%;
+}
