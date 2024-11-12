@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from '../css/LoginScreen.module.css';
 import { validateLogin } from "../../funcoes";
 
-export default ({ navigateToRegister, navigateToMenu }) => {
+export default ({ navigateToRegister, navigateToMenu, navigateToPasswordRecovery }) => {
   const hidePassIcon = ("./src/img/offshowpass.png");
   const showPassIcon = ("./src/img/onshowpass.png");
   const imgMacallmeTherapy = '/src/img/macallme-therapy.png'
@@ -80,7 +80,7 @@ export default ({ navigateToRegister, navigateToMenu }) => {
               </div>
             </div>
           </div>
-          <a className={styles.forgotPasswordText} onClick={navigateToRegister}>
+          <a className={styles.forgotPasswordText} onClick={navigateToPasswordRecovery}>
             Esqueci minha senha
           </a>
         </main>

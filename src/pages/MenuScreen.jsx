@@ -5,7 +5,7 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 // import 'bootstrap/dist/css/bootstrap.css';
 // import Carousel from 'react-bootstrap/Carousel';
 import { getNotas } from "../../funcoes";
-import '../css/MenuScreen.module.css';
+// import '../css/MenuScreen.module.css';
 import NotasComponent from "../components/NotasComponent"
 
 const MenuScreen =  ({navigateToChat }) => {
