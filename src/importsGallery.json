@@ -1,4 +1,8 @@
 {
+    "chat":{
+        "src": "/src/img/chat.png",
+        "alt": "chat"
+    },
     "macallmeTherapy":{
         "src": "/src/img/macallme-therapy.png",
         "alt": "Macallme Therapy"

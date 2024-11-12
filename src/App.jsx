@@ -8,6 +8,7 @@ import AjudaScreen from "./pages/AjudaScreen.jsx";
 import Estatistica from "./pages/Estatistica.jsx"; 
 import Doacao from "./pages/Doacao.jsx"; 
 import PasswordRecovery from "./pages/PasswordRecovery.jsx"; 
+import Profile from "./pages/Profile.jsx";
 
 const App = () => {
   const [screen, setScreen] = useState("login");
@@ -47,6 +48,7 @@ const App = () => {
       {screen === "estatistica" && <Estatistica />} 
       {screen === "doacao" && <Doacao />}
       {screen === "passwordrecovery" && <PasswordRecovery />}
+      {screen === "profile" && <Profile />}
     </div>
   );
 };

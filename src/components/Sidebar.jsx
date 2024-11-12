@@ -1,7 +1,7 @@
 import React from 'react';
 // import styles from '../css/Sidebar.css';
-
-const Sidebar = ({ navigateToMenu, navigateToChat, navigateToAjuda, navigateToEstatistica, navigateToDoacao }) => {
+import imgGallery from '../importsGallery.json'
+const Sidebar = ({  navigateToMenu, navigateToChat, navigateToAjuda, navigateToEstatistica, navigateToDoacao }) => {
   return (
     <div className="menu">
       <div className="icones">
@@ -10,7 +10,7 @@ const Sidebar = ({ navigateToMenu, navigateToChat, navigateToAjuda, navigateToEs
         </button>
 
         <button className='chat' onClick={navigateToChat}>
-          <img src="./img/chat.png" className='iconChat' id='2' />
+          <img src={imgGallery.chat.src} className='iconChat' id='2' />
         </button>
 
         <button className='autoajuda' onClick={navigateToAjuda}>
