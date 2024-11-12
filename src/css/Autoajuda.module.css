@@ -46,8 +46,8 @@
 }
 
 .autorImagem {
-    width: 10%;
-    height: 10%;
+    max-width: 30%;
+    height: 30%;
     border-radius: 100%;
 }
 
@@ -80,3 +80,4 @@
     font-size: medium;
     font-weight: 500;
 }
+

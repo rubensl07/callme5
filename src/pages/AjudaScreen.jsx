@@ -6,6 +6,9 @@ import styles from "../css/Autoajuda.module.css"
 const AjudaScreen = ({ onLoad }) => {
     const [listaAutoajuda, setListaAutoajuda] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [conteudo, setConteudo] = useState(false);
+    const [foco, setFoco] = useState(true);
+    const [info, setInfo] = useState({})
 
     useEffect(() => {
         const obterAutoajuda = async () => {
@@ -25,39 +28,53 @@ const AjudaScreen = ({ onLoad }) => {
     
     return (
         <div className={styles.ajudaScreen}>
-           <h2>O que você procura?</h2>
-           <input type="text" placeholder="Não achou o que estava procurando?" name="" id="" />
-           <button className={styles.addArtigo}> + </button>
+           <h2 hidden={conteudo}>O que você procura?</h2>
+           <input hidden={conteudo} type="text" placeholder="Não achou o que estava procurando?" name="" id="" />
+           <button className={styles.addArtigo} > + </button>
             {listaAutoajuda.length > 0 ? (
-                <ul>
+                <ul hidden={conteudo}>
                     {listaAutoajuda.map((item, index) => (
-                        <li key={index}>
+                        <li key={index} onClick={() => {setConteudo(true); setFoco(false);setInfo(item)}}  hidden={conteudo}>
                             {item.imagem && (
                                 <img 
                                     className={styles.artigoImagem}
                                     src={item.imagem} 
                                     alt={item.titulo} 
+                                    hidden={conteudo}
                                 />
                             )}
-                            <h3>{item.titulo}</h3>
+                            <h3 hidden={conteudo}>{item.titulo}</h3>
+
                             {item.autor && (
-                                <div>
+                                <div hidden={conteudo}>
                                     <img 
                                         className={styles.autorImagem}
                                         src={item.autor.foto} 
                                         alt={item.autor.nome} 
+                                        hidden={conteudo}
                                     />
-                                    <p>{item.autor.nome}</p>
+                                    <p hidden={conteudo}>{item.autor.nome}</p>
                                 </div>
                             )}
                         </li>
                     ))}
                 </ul>
             ) : (
-                <p>Nenhum artigo disponível</p>
+                <p hidden={conteudo}>Nenhum artigo disponível</p>
             )}
+            <div className="conteudo" hidden={foco}>
+                
+                <p className="foco" hidden={foco}>
+                    {info.titulo}
+                    {info.imagem}
+                    {info.conteudo}
+                </p>
+                
+                
+            </div>
         </div>
     );
+
 };
 
 export default AjudaScreen;
