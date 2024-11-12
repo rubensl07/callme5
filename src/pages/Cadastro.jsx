@@ -7,7 +7,7 @@ import imgLogoTexto from '../img/logo-texto.png';
 import imgMacallmeHugging from '../img/macallme-hugging.png'
 
 
-function Cadastro() {
+export default () =>{
   const clienteRef = useRef(null);
   const estudanteRef = useRef(null);
   const profissionalRef = useRef(null);
@@ -47,12 +47,12 @@ function Cadastro() {
   }
   return (
     <div className={styles.container}>
-      <div className={styles.left}>
+      <div className={styles.content}>
         <header>
           <img src={imgLogoTexto} alt="Logotipo do site" />
           <h2>Para quando o mundo parecer turbulento</h2>
         </header>
-        <ul>
+        <ul className={styles.ul}>
           <li onClick={(e) => changeRole(1, e)} className={`${styles.selecionado}`}>Quero desabafar</li>
           <li onClick={(e) => changeRole(2, e)} className={``}>Estudo psicologia</li>
           <li onClick={(e) => changeRole(3, e)} className={``}>Sou psicólogo</li>
@@ -70,7 +70,7 @@ function Cadastro() {
 
         <div className={`${styles.checkboxField}`}>
           <input type="checkbox" id="checkbox" />
-          <label htmlFor="checkbox">Aceito os <span>termos e condições</span></label>
+          <label htmlFor="checkbox">Aceito os <span>termos e condições</span>.</label>
         </div>
 
         <button onClick={handleButtonClick}>Criar Conta</button>
@@ -82,5 +82,3 @@ function Cadastro() {
     </div>
   );
 }
-
-export default Cadastro;

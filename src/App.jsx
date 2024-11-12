@@ -13,7 +13,7 @@ const App = () => {
 
   const navigateToRegister = () => setScreen("register");
   const navigateToLogin = () => setScreen("login");
-  const handleLogin = () => setScreen("menu");
+  const navigateToMenu = () => setScreen("menu");
   const navigateToChat = () => setScreen("chat");
   const navigateToAjuda = () => setScreen("ajuda"); 
   const navigateToEstatistica = () => setScreen("estatistica"); 
@@ -24,7 +24,7 @@ const App = () => {
       {screen === "login" && (
         <LoginScreen
           navigateToRegister={navigateToRegister}
-          handleLogin={handleLogin}
+          navigateToMenu={navigateToMenu}
         />
       )}
       {screen === "register" && (

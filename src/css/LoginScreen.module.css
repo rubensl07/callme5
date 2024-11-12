@@ -5,9 +5,8 @@
 
 .container{
     display: grid;
-    grid-template-columns: 7fr 4fr;
+    grid-template-columns: 4fr 7fr;
     height: 100vh;
-
 }
 .content{
     display: flex;
@@ -28,15 +27,14 @@
 }
 .container main{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     width: 100%;
-    padding: 0 2%;
-    align-items: center;
+    padding: 0 5%;
     margin-bottom: 5%;
 }
 .inputFieldContainer{
     display: grid;
-    grid-template-columns: 1fr 1fr;
     width: 100%;
     gap: 2rem;
 }
@@ -44,12 +42,12 @@
     display: flex;
     background-color: white;
     align-items: center;
-    height: 3rem;
+    height: 5rem;
     border-radius: 34px;
     padding-right: 1rem;
 }
 .inputFieldContainer p{
-    font-size: 1.5rem;
+    font-size: 200%;
     text-wrap: nowrap;
     background-color: #2755B2;
     display: flex;
@@ -60,79 +58,72 @@
     border-radius: 34px;
     margin-right: .5rem;
     margin-bottom: 0;
+    width: fit-content;
 }
 .inputFieldContainer input{
     width: 100%;
-    font-size: 1rem;
+    font-size: 2rem;
     outline: none;
     border: none;
+}
+.inputFieldContainer>div>div{
+    display: flex;
+    padding: 0 1rem;
+    align-items: center;
+    height: 100%;
+    justify-content: space-between;
+    width: 100%;
 }
 .inputFieldContainer img{
     height: 50%;
     cursor: pointer;
 }
-.container ul{
-    display: grid;
-    background-color: #EEF9FF;
-    width: 80%;
-    grid-template-columns: 1fr 1fr 1fr;
-    border-radius: 10px;
-    height: 4rem;
-}
-.container li{
-    font-size: 1.5em;
-    text-decoration: none;
-    align-items: center;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    color: #2754B2;
-    cursor: pointer;
-}
-.container .selecionado{
-    border-radius: 10px;
-    background-color: #2754B2;
-    color: white;
-}
 
-.checkboxField{
-    display: flex;
-    gap: 1rem;
-    font-size: 1.5rem;
-    color: white;
-    align-items: center;
-
-}
-.checkboxField input{
-    height: 2rem;
-    aspect-ratio: 1/1;
-}
-.checkboxField span{
-    color: #0040C0;
-    cursor: pointer;
-}
-.checkboxField span:hover{
-    text-decoration: underline;
-}
 .container aside{
     display: grid;
     place-items: center;
     background-color: #D2E4FF;
     font-size: 3rem;
-    padding: 0 25%;
+    padding: 0;
     text-align: center;
 }
-.container .content button{
+.container aside p{
+    color: #213787
+}
+.buttonField{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.buttonField button{
     color: #1F55C6;
     background-color: #E2EFFF;
-    width: 50%;
+    width: 100%;
     border-radius: 32px;
     cursor: pointer;
     padding: 1rem 0;
     font-size: 2.5rem;
+    font-weight: bolder;
 }
 
-
-
-
-
+.buttonField .cadastroField{
+    background-color: #0B4ED7;
+    width: 90%;
+    border-radius: 0 0 32px 32px;
+}
+.cadastroField p{
+    cursor: pointer;
+    font-size: 1.3rem;
+    padding: 1rem 0;
+}
+.forgotPasswordText{
+    color: #213787;
+    font-weight: bolder;
+    font-size: 1.5rem;
+    cursor: pointer;
+    width: fit-content;
+}
+.forgotPasswordText:hover, .cadastroField p:hover{
+    text-decoration: underline;
+}

@@ -1,8 +1,3 @@
-
-
-
-
-
 import React, { useState, forwardRef, useImperativeHandle } from 'react';
 import styles from '../css/Cadastro.module.css'
 import { postCliente } from '/funcoes';
