@@ -7,6 +7,7 @@ import ChatScreen from "./pages/ChatScreen.jsx";
 import AjudaScreen from "./pages/AjudaScreen.jsx";
 import Estatistica from "./pages/Estatistica.jsx"; 
 import Doacao from "./pages/Doacao.jsx"; 
+import PasswordRecovery from "./pages/PasswordRecovery.jsx"; 
 
 const App = () => {
   const [screen, setScreen] = useState("login");
@@ -18,6 +19,8 @@ const App = () => {
   const navigateToAjuda = () => setScreen("ajuda"); 
   const navigateToEstatistica = () => setScreen("estatistica"); 
   const navigateToDoacao = () => setScreen("doacao");
+  const navigateToPasswordRecovery = () => setScreen("passwordrecovery");
+
 
   return (
     <div>
@@ -25,6 +28,7 @@ const App = () => {
         <LoginScreen
           navigateToRegister={navigateToRegister}
           navigateToMenu={navigateToMenu}
+          navigateToPasswordRecovery={navigateToPasswordRecovery}
         />
       )}
       {screen === "register" && (
@@ -42,6 +46,7 @@ const App = () => {
       {screen === "ajuda" && <AjudaScreen />} 
       {screen === "estatistica" && <Estatistica />} 
       {screen === "doacao" && <Doacao />}
+      {screen === "passwordrecovery" && <PasswordRecovery />}
     </div>
   );
 };

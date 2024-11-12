@@ -7,7 +7,6 @@
     display: grid;
     grid-template-columns: 7fr 4fr;
     height: 100vh;
-
 }
 .content{
     display: flex;
@@ -132,7 +131,9 @@
     font-size: 2.5rem;
 }
 
-
+.container aside p{
+    color: #213787
+}
 
 
 

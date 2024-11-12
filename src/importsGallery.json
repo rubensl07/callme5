@@ -1,0 +1,10 @@
+{
+    "macallmeTherapy":{
+        "src": "/src/img/macallme-therapy.png",
+        "alt": "Macallme Therapy"
+    },
+    "macallmeHugging":{
+        "src": "/src/img/macallme-hugging.png",
+        "alt": "Macallme Hugging a Banana"
+    }
+}
