@@ -1,14 +1,59 @@
 {
-    "chat":{
-        "src": "/src/img/chat.png",
-        "alt": "chat"
+    "logo":{
+        "src": "/src/img/logo.png",
+        "alt": "Logo Callme"
     },
-    "macallmeTherapy":{
-        "src": "/src/img/macallme-therapy.png",
-        "alt": "Macallme Therapy"
+    "logoText":{
+        "src": "/src/img/logo-texto.png",
+        "alt": "Logo Callme com texto"
     },
-    "macallmeHugging":{
-        "src": "/src/img/macallme-hugging.png",
-        "alt": "Macallme Hugging a Banana"
+    "showPass":{
+        "src": "/src/img/onshowpass.png",
+        "alt": "Exibir senha"
+    },
+    "hidePass":{
+        "src": "/src/img/offshowpass.png",
+        "alt": "Ocultar senha"
+    },
+    "lockIcon":{
+        "src": "/src/img/lock.png",
+        "alt": "Cadeado"
+    },
+    "nav":{
+        "autoajuda":{
+            "src": "./src/img/autoajuda.png",
+            "alt": "autoajuda"
+        },
+        "estatistica":{
+            "src": "/src/img/estatistica.png",
+            "alt": "estatistica"
+        },
+        "diario":{
+            "src": "/src/img/diario.png",
+            "alt": "diario"
+        },
+        "nota":{
+            "src": "/src/img/notas.png",
+            "alt": "nota"
+        },
+        "chat":{
+            "src": "/src/img/chat.png",
+            "alt": "chat"
+        },
+        "doacao":{
+            "src": "/src/img/doacao.png",
+            "alt": "doacao"
+        }
+    },
+    "macallme":{
+        "macallmeTherapy":{
+            "src": "/src/img/macallme-therapy.png",
+            "alt": "Macallme Therapy"
+        },
+        "macallmeHugging":{
+            "src": "/src/img/macallme-hugging.png",
+            "alt": "Macallme segurando uma banana e sonhando"
+        }
     }
+  
 }

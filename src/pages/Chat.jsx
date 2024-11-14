@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '../css/ChatScreen.module.css'
+import styles from '../css/Chat.module.css'
 import Sidebar from '../components/Sidebar'
 
 const ChatScreen = () => {

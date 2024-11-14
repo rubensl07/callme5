@@ -3,8 +3,8 @@ import Cliente from "../components/Cliente";
 import Estudante from "../components/Estudante";
 import Profissional from "../components/Profissional";
 import styles from '../css/Cadastro.module.css'
-import imgLogoTexto from '../img/logo-texto.png';
-import imgMacallmeHugging from '../img/macallme-hugging.png'
+import imgGallery from '../importsGallery.json'
+
 
 
 export default () =>{
@@ -45,11 +45,17 @@ export default () =>{
     event.currentTarget.classList.add(styles.selecionado);
     setTipoUsuarioCriado(role);
   }
+
+  const imagemMacallme = imgGallery.macallme.macallmeHugging
+
   return (
     <div className={styles.container}>
       <div className={styles.content}>
+        <div>
+          
+        </div>
         <header>
-          <img src={imgLogoTexto} alt="Logotipo do site" />
+          <img src={imgGallery.logoText.src} alt={imgGallery.logoText.alt} />
           <h2>Para quando o mundo parecer turbulento</h2>
         </header>
         <ul className={styles.ul}>
@@ -77,7 +83,7 @@ export default () =>{
       </div>
       <aside className={styles.aside}>
         <p>Junte-se a nós, cadastre-se agora!</p>
-        <img src={imgMacallmeHugging} alt="Macallme segurando uma banana e sonhando" />
+        <img src={imagemMacallme.src} alt={imagemMacallme.alt} />
       </aside>
     </div>
   );

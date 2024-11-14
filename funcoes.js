@@ -120,3 +120,24 @@ export async function validateLogin(dados) {
       return { success: false, data: null }; 
     }
 }
+
+export async function enviarPasswordRecovery(dados) {
+  const url = `${link}/recuperacaosenha/enviaremail`;
+
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(dados),
+  };
+
+  try {
+    const response = await fetch(url, options);
+    const data = await response.json(); 
+    return { success: response.ok, data }; 
+  } catch (error) {
+    console.error('Erro ao enviar dados: ', error);
+    return { success: false, data: null }; 
+  }
+}

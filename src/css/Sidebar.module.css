@@ -1,0 +1,42 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 2%;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+  }
+  .container>img{
+    width: 70%;
+  }
+  .container>div{
+    height: 85%;
+    width: 100%;
+    background-color: #1F55C6;
+    border-radius: 100px 100px 0px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  .icon{
+    background-color: #7FB3FF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    cursor: pointer;
+    width: 50%;
+    aspect-ratio: 1/1;
+  }
+  .icon>img{
+    width: 50%;
+  }
+
+
+  

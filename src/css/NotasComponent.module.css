@@ -1,4 +1,4 @@
-ul {
+.container ul {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -11,7 +11,7 @@ ul {
     background: none;
 }
 
-li {
+.container li {
     display: flex;
     justify-content: center;
     align-items: center;

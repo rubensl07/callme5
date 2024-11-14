@@ -3,7 +3,7 @@ import { getAutoajuda } from "../../funcoes";
 // import Sidebar from '../components/Sidebar';
 import styles from "../css/Autoajuda.module.css"
 
-const AjudaScreen = ({ onLoad }) => {
+export default ({ onLoad }) => {
     const [listaAutoajuda, setListaAutoajuda] = useState([]);
     const [loading, setLoading] = useState(true);
     const [conteudo, setConteudo] = useState(false);
@@ -76,5 +76,3 @@ const AjudaScreen = ({ onLoad }) => {
     );
 
 };
-
-export default AjudaScreen;

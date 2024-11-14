@@ -1,4 +1,4 @@
-const Doacao = () => {
+export default () => {
     return (
         <div>
             <ul>
@@ -10,4 +10,3 @@ const Doacao = () => {
     );
 };
 
-export default Doacao;

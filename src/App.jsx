@@ -1,55 +1,35 @@
-import React, { useState } from "react";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './css/App.css';
-import LoginScreen from "./pages/LoginScreen.jsx";
-import RegisterScreen from "./pages/Cadastro.jsx";
-import MenuScreen from "./pages/MenuScreen.jsx";
-import ChatScreen from "./pages/ChatScreen.jsx";
-import AjudaScreen from "./pages/AjudaScreen.jsx";
+import Login from "./pages/Login.jsx";
+import Cadastro from "./pages/Cadastro.jsx";
+import Notas from "./pages/Notas.jsx";
+import ChatScreen from "./pages/Chat.jsx";
+import AjudaScreen from "./pages/Autoajuda.jsx";
 import Estatistica from "./pages/Estatistica.jsx"; 
 import Doacao from "./pages/Doacao.jsx"; 
-import PasswordRecovery from "./pages/PasswordRecovery.jsx"; 
+import PasswordRecovery1 from "./pages/PasswordRecoveryMailSend.jsx"; 
+import PasswordRecovery2 from "./pages/PasswordRecoveryNewPass.jsx"; 
 import Profile from "./pages/Profile.jsx";
+import Menu from "./pages/Menu.jsx";
 
 const App = () => {
-  const [screen, setScreen] = useState("login");
-
-  const navigateToRegister = () => setScreen("register");
-  const navigateToLogin = () => setScreen("login");
-  const navigateToMenu = () => setScreen("menu");
-  const navigateToChat = () => setScreen("chat");
-  const navigateToAjuda = () => setScreen("ajuda"); 
-  const navigateToEstatistica = () => setScreen("estatistica"); 
-  const navigateToDoacao = () => setScreen("doacao");
-  const navigateToPasswordRecovery = () => setScreen("passwordrecovery");
-
-
   return (
-    <div>
-      {screen === "login" && (
-        <LoginScreen
-          navigateToRegister={navigateToRegister}
-          navigateToMenu={navigateToMenu}
-          navigateToPasswordRecovery={navigateToPasswordRecovery}
-        />
-      )}
-      {screen === "register" && (
-        <RegisterScreen navigateToLogin={navigateToLogin} />
-      )}
-      {screen === "menu" && (
-        <MenuScreen 
-          navigateToChat={navigateToChat} 
-          navigateToAjuda={navigateToAjuda}
-          navigateToEstatistica={navigateToEstatistica}
-          navigateToDoacao={navigateToDoacao}
-        />
-      )}
-      {screen === "chat" && <ChatScreen />}
-      {screen === "ajuda" && <AjudaScreen />} 
-      {screen === "estatistica" && <Estatistica />} 
-      {screen === "doacao" && <Doacao />}
-      {screen === "passwordrecovery" && <PasswordRecovery />}
-      {screen === "profile" && <Profile />}
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/cadastro" element={<Cadastro />} />
+        <Route path="/menu" element={<Menu />} />
+        <Route path="/notas" element={<Notas />} />
+        <Route path="/chat" element={<ChatScreen />} />
+        <Route path="/ajuda" element={<AjudaScreen />} />
+        <Route path="/estatistica" element={<Estatistica />} />
+        <Route path="/doacao" element={<Doacao />} />
+        <Route path="/passwordrecovery1" element={<PasswordRecovery1 />} />
+        <Route path="/passwordrecovery2" element={<PasswordRecovery2 />} />
+        <Route path="/profile" element={<Profile />} />
+      </Routes>
+    </Router>
   );
 };
 

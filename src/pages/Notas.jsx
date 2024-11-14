@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import Sidebar from '../components/Sidebar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 // import 'bootstrap/dist/css/bootstrap.css';
 // import Carousel from 'react-bootstrap/Carousel';
 import { getNotas } from "../../funcoes";
-// import '../css/MenuScreen.module.css';
+import Sidebar from '../components/Sidebar';
+import styles from '../css/Notas.module.css';
 import NotasComponent from "../components/NotasComponent"
 
-const MenuScreen =  ({navigateToChat }) => {
+export default ({navigateToChat }) => {
   const [showPopSquare, setShowPopSquare] = useState(false)
   const [showInput, setShowInput] = useState(false)
 
@@ -70,23 +70,23 @@ const MenuScreen =  ({navigateToChat }) => {
         </Carousel.Item> 
       </Carousel> */}
 
-      <div className="botoes">
-        <div className="botao-container">
-          <button className="postar"><p>Escrever Nota</p></button>
-          <button className="responder" onClick={handleResponderClick}><p>Responder Nota</p></button>
+      <div className={styles.botoes}>
+        <div className={styles.botaoContainer}>
+          <button className={styles.postar}><p>Escrever Nota</p></button>
+          <button className={styles.responder} onClick={handleResponderClick}><p>Responder Nota</p></button>
         </div>
 
         <div className={`pop-square ${showPopSquare ? 'fade-in' : 'fade-out'}`}>
-          <p className="popUp">Ver sua resposta!</p>
+          <p className={styles.popUp}>Ver sua resposta!</p>
         </div>
       </div>
 
       {showInput && (
-        <div className="input-responder">
-          <input className="responderInput" type="text" placeholder="Acrescente seu tópico..." />
+        <div className={styles.inputResponder}>
+          <input className={styles.responderInput} type="text" placeholder="Acrescente seu tópico..." />
           <FontAwesomeIcon
             icon={faPaperPlane}
-            className="icon-enviar"
+            className={styles.iconEnviar}
             onClick={handleIconClick}
           />
         </div>
@@ -94,5 +94,3 @@ const MenuScreen =  ({navigateToChat }) => {
     </div>
   );
 };
-
-export default MenuScreen;
