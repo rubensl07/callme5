@@ -5,16 +5,16 @@ const url = 'http://localhost:3000'
 const versao = 'v1'
 const link = `${url}/${versao}/callme`
 
-export async function getUsuarios(){
-    
-    const url = `${link}/usuarios`
-    const response = await fetch(url)
-    const data = await response.json()
+export async function getUsuarios() {
 
-    return data.dados
+  const url = `${link}/usuarios`
+  const response = await fetch(url)
+  const data = await response.json()
+
+  return data.dados
 }
-export async function getAvatares(){
-    
+export async function getAvatares() {
+
   const url = `${link}/avatares`
   const response = await fetch(url)
   const data = await response.json()
@@ -22,43 +22,43 @@ export async function getAvatares(){
   return data.dados
 }
 
-export async function getNotas(params){
-    
-    let url = `${link}/notas?`
-    if(params.excluidas){
-        url += `&excluidas=${params.excluidas}`
-    }
-    if(params.quantity){
-        url += `&quantity=${params.quantity}`
-    }
-    const response = await fetch(url)
-    const data = await response.json()
+export async function getNotas(params) {
 
-    return data.dados
+  let url = `${link}/notas?`
+  if (params.excluidas) {
+    url += `&excluidas=${params.excluidas}`
+  }
+  if (params.quantity) {
+    url += `&quantity=${params.quantity}`
+  }
+  const response = await fetch(url)
+  const data = await response.json()
+
+  return data.dados
 }
 
 
 export async function postCliente(dados) {
-    const url = `${link}/cliente`;
-  
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(dados),
-    };
-  
-    try {
-      console.log(dados);
-      
-      const response = await fetch(url, options);
-      const data = await response.json(); 
-      return { success: response.ok, data }; 
-    } catch (error) {
-      console.error('Erro ao enviar dados: ', error);
-      return { success: false, data: null }; 
-    }
+  const url = `${link}/cliente`;
+
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(dados),
+  };
+
+  try {
+    console.log(dados);
+
+    const response = await fetch(url, options);
+    const data = await response.json();
+    return { success: response.ok, data };
+  } catch (error) {
+    console.error('Erro ao enviar dados: ', error);
+    return { success: false, data: null };
+  }
 }
 export async function postEstudante(dados) {
   const url = `${link}/estudante`;
@@ -73,11 +73,11 @@ export async function postEstudante(dados) {
 
   try {
     const response = await fetch(url, options);
-    const data = await response.json(); 
-    return { success: response.ok, data }; 
+    const data = await response.json();
+    return { success: response.ok, data };
   } catch (error) {
     console.error('Erro ao enviar dados: ', error);
-    return { success: false, data: null }; 
+    return { success: false, data: null };
   }
 }
 export async function postProfissional(dados) {
@@ -93,15 +93,15 @@ export async function postProfissional(dados) {
 
   try {
     const response = await fetch(url, options);
-    const data = await response.json(); 
-    return { success: response.ok, data }; 
+    const data = await response.json();
+    return { success: response.ok, data };
   } catch (error) {
     console.error('Erro ao enviar dados: ', error);
-    return { success: false, data: null }; 
+    return { success: false, data: null };
   }
 }
 
-export async function getAutoajuda(){
+export async function getAutoajuda() {
   const url = `${link}/autoajudas`
   const response = await fetch(url)
   const data = await response.json()
@@ -109,24 +109,24 @@ export async function getAutoajuda(){
 }
 
 export async function validateLogin(dados) {
-    const url = `${link}/login`;
-  
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(dados),
-    };
-  
-    try {
-      const response = await fetch(url, options);
-      const data = await response.json(); 
-      return { success: response.ok, data }; 
-    } catch (error) {
-      console.error('Erro ao enviar dados: ', error);
-      return { success: false, data: null }; 
-    }
+  const url = `${link}/login`;
+
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(dados),
+  };
+
+  try {
+    const response = await fetch(url, options);
+    const data = await response.json();
+    return { success: response.ok, data };
+  } catch (error) {
+    console.error('Erro ao enviar dados: ', error);
+    return { success: false, data: null };
+  }
 }
 
 export async function enviarPasswordRecovery(dados) {
@@ -142,10 +142,36 @@ export async function enviarPasswordRecovery(dados) {
 
   try {
     const response = await fetch(url, options);
-    const data = await response.json(); 
-    return { success: response.ok, data }; 
+    const data = await response.json();
+    return { success: response.ok, data };
   } catch (error) {
     console.error('Erro ao enviar dados: ', error);
-    return { success: false, data: null }; 
+    return { success: false, data: null };
+  }
+}
+
+export function validarSenha(value) {
+
+  const detalhesJSON = {
+    minCharacter: (value.length >= 8),
+    maxCharacter: (value.length <= 64),
+    number: (/\d/.test(value)),
+    lowerCase: (/[a-z]/.test(value)),
+    upperCase: (/[A-Z]/.test(value)),
+    specialCharacter: (/[^A-Za-z0-9]/.test(value))
+  }
+
+  let result = true
+
+  for (let chave in detalhesJSON) {
+    if (detalhesJSON[chave] === false) {
+      result = false
+      break;
+    }
+  }
+
+  return {
+    detalhes: detalhesJSON,
+    result
   }
 }

@@ -24,7 +24,7 @@ export default () => {
     }
     if (validateStatus) {
         response = await enviarPasswordRecovery(dados)
-        navigate('/passwordrecovery2')
+        navigate('/passwordrecoveryNewPass')
     }
 
   };

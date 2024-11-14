@@ -3,6 +3,7 @@ import styles from '../css/Profile.module.css';
 import Sidebar from "../components/Sidebar.jsx";
 import imgGallery from '../importsGallery.json';
 import { getAvatares } from "../../funcoes.js";
+import AvatarList from "../components/avatarList.jsx";
 
 export default ({ onLoad }) => {
     // Initialize state variables at the top of the component
@@ -32,10 +33,10 @@ export default ({ onLoad }) => {
     
     if (loading) return <p>Carregando...</p>;
 
-    console.log(listaAvatares);
 
     return (
         <div className={styles.container}>
+            <AvatarList listaAvatares={listaAvatares}/>
             <Sidebar />
             <div className={styles.content}>
                 <div className={styles.avatarContainer}>

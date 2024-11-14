@@ -81,7 +81,7 @@ let teste = true
               </div>
             </div>
           </div>
-          <a className={styles.forgotPasswordText} onClick={()=>navigate('/passwordrecovery1')}>
+          <a className={styles.forgotPasswordText} onClick={()=>navigate('/passwordrecoveryMailSend')}>
             Esqueci minha senha
           </a>
         </main>

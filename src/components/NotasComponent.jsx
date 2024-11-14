@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getNotas } from '../../funcoes';
 import styles from '../css/NotasComponent.module.css';
 // import 'bootstrap/dist/css/bootstrap.css';
-// import Carousel from 'react-bootstrap/Carousel';
+// import Carousel from 'react-bootstrap/Carousel'  ;
 
 const NotasComponent = ({ onNotasLoad }) => {
     const [notas, setNotas] = useState([]);
