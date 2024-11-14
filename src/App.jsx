@@ -25,8 +25,8 @@ const App = () => {
         <Route path="/ajuda" element={<AjudaScreen />} />
         <Route path="/estatistica" element={<Estatistica />} />
         <Route path="/doacao" element={<Doacao />} />
-        <Route path="/passwordrecovery1" element={<PasswordRecovery1 />} />
-        <Route path="/passwordrecovery2" element={<PasswordRecovery2 />} />
+        <Route path="/passwordrecoveryMailSend" element={<PasswordRecovery1 />} />
+        <Route path="/passwordrecoveryNewPass" element={<PasswordRecovery2 />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
     </Router>
