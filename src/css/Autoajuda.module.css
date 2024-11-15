@@ -1,7 +1,12 @@
+.ajudaScreen {
+    background-color: #E3EFFF;
+}
+
 .ajudaScreen h2{
     font-family: Poppins;
     color: #215CB9;
     font-size: x-large;
+    margin-bottom: 1%;
 }
 
 .ajudaScreen h3{
@@ -16,7 +21,6 @@
 }
 
 .ajudaScreen ul {
-    display: flex;
     flex-wrap: wrap;
     margin: 0;
     gap: 3%;
@@ -35,6 +39,35 @@
     gap: 100%;
     margin-bottom: 3%;
     cursor: auto;
+}
+
+.containerBotoes {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 85vw;
+    height: 25vh;
+}
+
+.ajudaScreen .editar {
+    background-color: #213787;
+    width: 20%;
+    height: 20%;
+    border-radius: 10px;
+    border: 5px solid #4D72DB;
+}
+
+.ajudaScreen .excluir {
+    background-color: #4D72DB;
+    width: 20%;
+    height: 20%;
+    border-radius: 10px;
+    border: 5px solid #1B3381;
+}
+
+.ajudaScreen h5 {
+    font-size: x-large;
+    color: #E3EFFF;
 }
 
 .artigoImagem {
@@ -65,8 +98,12 @@
     border: 2px #5F86F7 solid;
     border-radius: 100%;
     color: #F2F5F8;
-    margin-left: 93.5%;
+    margin-left: 90%;
     margin-top: 40%;
+}
+
+.ajudaScreen .pesquisar {
+     margin-bottom: 2%;
 }
 
 .ajudaScreen input {
@@ -81,3 +118,54 @@
     font-weight: 500;
 }
 
+.conteudo {
+    height: 100vh;
+    offset: 0px;
+    align-items:center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.foco {
+    width: 85%;
+    height: 70vh;
+    background-color: #F2F5F8;
+    border: 5px #6188C5 solid;
+    border-radius: 10px;
+}
+
+.detalhesContainer {
+    display: flex;
+    align-items: flex-start;
+}
+
+.detalhesImagem {
+    width: 20vw;
+    height: 69vh; 
+    margin-right: 20px;
+    border-radius: 5px;
+}
+
+.detalhesTexto {
+    display: flex;
+    flex-direction: column; 
+}
+
+.detalhesTexto h3 {
+    margin-top: 10px;
+    font-size: x-large;
+    width: 60%;
+}
+
+.detalhesTexto p {
+    margin-top: 80px;
+    margin-left: 15px;
+    width: 90%;
+    font-size: smaller;
+}
+.tela{
+    width: 100vw;
+    height: 100vh;
+    margin-left: 10%;
+}
