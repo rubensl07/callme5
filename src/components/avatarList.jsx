@@ -1,8 +1,11 @@
 import styles from '../css/AvatarList.module.css'
 
-export default ({listaAvatares}) => {
-    console.log(listaAvatares);
-    
+export default ({ listaAvatares,onClose, onSelectAvatar }) => {
+        
+    function selectImage(avatar){
+        onSelectAvatar(avatar);
+        onClose()
+    }
     return (
         <div className={styles.container}>
             <div className={styles.content}>
@@ -10,42 +13,20 @@ export default ({listaAvatares}) => {
                     <p>
                         Escolha seu Avatar
                     </p>
-                    <div className={styles.closeButton}>
+                    <div className={styles.closeButton} onClick={onClose}>
                         X
                     </div>
                 </div>
-                <div className={styles.avataresField}>
-                    {listaAvatares.length > 0 ? (
-                        !conteudo && (
-                            <ul>
-                                {listaAutoajuda.map((item, index) => (
-                                    <li key={index} onClick={() => { setConteudo(true); setFoco(false); setInfo(item); }}>
-                                        {item.imagem && (
-                                            <img
-                                                className={styles.artigoImagem}
-                                                src={item.imagem}
-                                                alt={item.titulo}
-                                            />
-                                        )}
-                                        <h3>{item.titulo}</h3>
 
-                                        {item.autor && (
-                                            <div>
-                                                <img
-                                                    className={styles.autorImagem}
-                                                    src={item.autor.foto}
-                                                    alt={item.autor.nome}
-                                                />
-                                                <p>{item.autor.nome}</p>
-                                            </div>
-                                        )}
-                                    </li>
-                                ))}
-                            </ul>
-                        )
-                    ) : (
-                        !conteudo && <p>Nenhum artigo disponível</p>
-                    )}
+                <div className={styles.avataresField}>
+                {listaAvatares.map((avatar) => (
+                        <img 
+                            key={avatar.id} 
+                            src={avatar.img} 
+                            alt={`Avatar ID: ${avatar.id}`}
+                            onClick={()=>{selectImage(avatar)}} 
+                        />
+                    ))}
                 </div>
             </div>
         </div>

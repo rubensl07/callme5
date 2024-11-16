@@ -15,8 +15,7 @@
     height: 90%;
     width: 90%;
     border-radius: 1rem;
-    padding: 0 4%;
-
+    padding: 0 4% 2% 4%;
 }
 .contentHeader{
     display: flex;
@@ -44,7 +43,23 @@
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 4rem;
 }
-.avataresField{
+.avataresField {
     flex-grow: 1;
-    background-color: red;
+    background-color: #7FB3FF;
+    display: flex;
+    justify-content: center; 
+    flex-wrap: wrap; 
+    column-gap: 2rem;
+    padding: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 0.5rem;
 }
+
+.avataresField img { 
+    height: 150px;
+    aspect-ratio: 1/1;
+    border-radius: 100%; 
+    cursor: pointer;
+}
+
+  

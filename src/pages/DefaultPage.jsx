@@ -6,7 +6,7 @@ export default () => {
     const navigate = useNavigate();
     
     useEffect(() => {
-        navigate('/notas');
+        navigate('/login');
     }, [navigate]);
 
     return <></>;

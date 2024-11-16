@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import styles from '../css/PasswordRecovery.module.css';
 import imgGallery from '../importsGallery.json'
-import { enviarPasswordRecovery } from "../../funcoes";
+import { enviarPasswordRecovery, validarEmail } from "../../funcoes";
 import CallmeLogo from "../components/CallmeLogo";
 // import { validateLogin } from "../../funcoes";
 
@@ -22,9 +22,13 @@ export default () => {
         validateStatus = false
         alert("Campos vazios");
     }
+    if (validateStatus && !validarEmail(dados.email)){
+      validateStatus = false
+      alert("E-mail inválido")
+    }
     if (validateStatus) {
         response = await enviarPasswordRecovery(dados)
-        navigate('/passwordrecoveryNewPass')
+        navigate('/passwordRecoveryNewPass')
     }
 
   };

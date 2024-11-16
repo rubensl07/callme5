@@ -13,6 +13,14 @@ export async function getUsuarios() {
 
   return data.dados
 }
+export async function getUsuario(id) {
+
+  const url = `${link}/usuario/${id}`
+  const response = await fetch(url)
+  const data = await response.json()
+
+  return data.dados
+}
 export async function getAvatares() {
 
   const url = `${link}/avatares`
@@ -60,6 +68,26 @@ export async function postCliente(dados) {
     return { success: false, data: null };
   }
 }
+export async function editCliente(dados,id) {
+  const url = `${link}/cliente/usuario/${id}`
+  const options = {
+    method: 'PUT', 
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(dados)
+  }
+
+  try {
+      const response = await fetch(url,options)
+      const data = await response.json();
+      return { success: response.ok, data }; 
+  } catch (error) {
+    console.error('Erro ao enviar dados: ', error);
+      return { success: false, data: null }; 
+  }
+}
+
 export async function postEstudante(dados) {
   const url = `${link}/estudante`;
 
@@ -174,4 +202,11 @@ export function validarSenha(value) {
     detalhes: detalhesJSON,
     result
   }
+}
+
+export function validarEmail(email) {
+  console.log(email);
+  
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;  
+  return regex.test(email);
 }

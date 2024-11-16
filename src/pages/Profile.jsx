@@ -1,23 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { useNavigate } from 'react-router-dom';
 import styles from '../css/Profile.module.css';
 import Sidebar from "../components/Sidebar.jsx";
 import imgGallery from '../importsGallery.json';
-import { getAvatares } from "../../funcoes.js";
+import { editCliente, getAvatares, validarEmail } from "../../funcoes.js";
 import AvatarList from "../components/avatarList.jsx";
+import ImageFocus from "../components/imageFocus.jsx";
+import { AuthContext } from "../../Contexts/AuthContext";
 
 export default ({ onLoad }) => {
-    // Initialize state variables at the top of the component
-    const [nome, setNome] = useState("Augusto Fernando");
-    const [email, setEmail] = useState("teste@email");
-    const [nascimento, setNascimento] = useState("2000-01-01");
+    const navigate = useNavigate();
+    const { auth, setAuth } = useContext(AuthContext);
+    const infoUser = auth.user;
+    
+    const [nome, setNome] = useState(infoUser.nome);
+    const [email, setEmail] = useState(infoUser.login);
+    const [nascimento, setNascimento] = useState(infoUser.data_nascimento.substring(0, 10));
+    const [idAvatar, setIdAvatar] = useState(infoUser.id_avatar);
     const [listaAvatares, setListaAvatares] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [conteudo, setConteudo] = useState(false);
-    const [foco, setFoco] = useState(true);
-    const [info, setInfo] = useState({});
+    const [showAvatarList, setShowAvatarList] = useState(false);
+    const [showFocusImage, setShowFocusImage] = useState(false);
+    const [srcFotoPerfil, setSrcFotoPerfil] = useState(infoUser.foto);
+    const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
 
     useEffect(() => {
-        console.log("useEffect triggered");
         const obterAvatares = async () => {
             try {
                 const data = await getAvatares();
@@ -30,36 +37,92 @@ export default ({ onLoad }) => {
         };
         obterAvatares();
     }, [onLoad]);
-    
+
     if (loading) return <p>Carregando...</p>;
 
+    const handleLogout = () => {
+        setAuth({ isAuthenticated: false, user: null });
+    };
+
+    const handleExclude = () => {
+        setShowDeleteConfirmation(true); // Show confirmation modal
+    };
+
+    const confirmDelete = async () => {
+        // Add API call for account deletion if needed here
+        setShowDeleteConfirmation(false);
+        handleLogout();
+        alert("Conta excluída com sucesso.");
+    };
+
+    const cancelDelete = () => {
+        setShowDeleteConfirmation(false); // Close confirmation modal
+    };
+
+    const handleUpdate = async () => {
+        if (validarEmail(email)) {
+            const dados = {
+                login: email,
+                nome,
+                nascimento,
+                idAvatar
+            };
+            const response = await editCliente(dados, infoUser.id);
+            if (response.success) {
+                const dadosAtualizados = {
+                    login: dados.login,
+                    nome: dados.nome,
+                    data_nascimento: dados.nascimento,
+                    id_avatar: dados.idAvatar,
+                    foto: srcFotoPerfil
+                };
+
+                // Update the context state immutably
+                setAuth(prevState => ({
+                    ...prevState,
+                    user: { ...prevState.user, ...dadosAtualizados }
+                }));
+
+                alert("Perfil modificado com sucesso.");
+                console.log(response);
+            } else {
+                alert("Ocorreu um erro");
+            }
+        } else {
+            alert("Erro: E-mail inválido");
+        }
+    };
+
+    const handleSelectAvatar = (avatar) => {
+        setSrcFotoPerfil(avatar.img);
+        setIdAvatar(avatar.id);
+    };
 
     return (
         <div className={styles.container}>
-            <AvatarList listaAvatares={listaAvatares}/>
+            {showAvatarList && (
+                <AvatarList
+                    listaAvatares={listaAvatares}
+                    onClose={() => setShowAvatarList(false)}
+                    onSelectAvatar={handleSelectAvatar}
+                />
+            )}
             <Sidebar />
+            {showFocusImage && <ImageFocus src={srcFotoPerfil} onClose={() => setShowFocusImage(false)} />}
+            {showDeleteConfirmation && (
+                <div className={styles.deleteConfirmationModal}>
+                    <p>Tem certeza de que deseja excluir sua conta?</p>
+                    <button onClick={confirmDelete}>Sim</button>
+                    <button onClick={cancelDelete}>Cancelar</button>
+                </div>
+            )}
             <div className={styles.content}>
                 <div className={styles.avatarContainer}>
                     <div className={styles.focusAvatar}>
-                        <img src="https://i.natgeofe.com/k/093c14b4-978e-41f7-b1aa-3aff5d1c608a/gray-wolf-closeup_square.jpg" alt="Avatar" />
+                        <img src={srcFotoPerfil} alt="Avatar" onClick={() => setShowFocusImage(true)} />
                     </div>
-                    <div className={styles.avatarHorizontalList}>
-                        <div>
-                            <div className={styles.imgContainer}>
-                                <img src="https://wolf.org/wp-content/uploads/2021/04/wcs_2009_DN_snow_portrait.jpg" alt="Avatar 1" />
-                            </div>
-                            <div className={styles.imgContainer}>
-                                <img src="https://wolf.org/wp-content/uploads/2021/04/wcs_2009_DN_snow_portrait.jpg" alt="Avatar 2" />
-                            </div>
-                        </div>
-                        <div style={{ justifyContent: "end" }}>
-                            <div className={styles.imgContainer}>
-                                <img src="https://wolf.org/wp-content/uploads/2021/04/wcs_2009_DN_snow_portrait.jpg" alt="Avatar 3" />
-                            </div>
-                            <div className={styles.imgContainer}>
-                                +
-                            </div>
-                        </div>
+                    <div className={styles.avatarContent} onClick={() => setShowAvatarList(!showAvatarList)}>
+                        <p>Trocar avatar</p>
                     </div>
                 </div>
                 <div className={styles.inputFieldContainer}>
@@ -82,7 +145,7 @@ export default ({ onLoad }) => {
                                 <input type="date" value={nascimento} onChange={(e) => setNascimento(e.target.value)} />
                             </div>
                         </div>
-                        <a className={styles.trocarSenhaField}>
+                        <a className={styles.trocarSenhaField} onClick={() => navigate('/passwordRecoveryMailSend')}>
                             <img src={imgGallery.lockIcon.src} alt={imgGallery.lockIcon.alt} />
                             <p>Trocar Senha</p>
                         </a>
@@ -92,8 +155,9 @@ export default ({ onLoad }) => {
                         </a>
                     </div>
                     <div className={styles.buttons}>
-                        <button>Sair da conta</button>
-                        <button>Excluir conta</button>
+                        <button onClick={handleExclude}>Excluir conta</button>
+                        <button onClick={handleLogout}>Sair da conta</button>
+                        <button onClick={handleUpdate}>Atualizar informações</button>
                     </div>
                 </div>
             </div>

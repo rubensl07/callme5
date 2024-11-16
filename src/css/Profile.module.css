@@ -12,12 +12,22 @@
     flex-grow: 1;
     gap: 2rem;
 }
+
+
 .avatarContainer{
     height: 20rem;
-    width: 100%;
+    width: 90%;
     display: flex;
-    align-items: end;
+    justify-content: end;
     position: relative;
+    background-color: #7FB3FF;
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+    align-self: end;
+    border-radius: .5rem;
+    justify-content: end;
+
 }
 .focusAvatar{
     height: 14rem;
@@ -25,53 +35,33 @@
     border: 1rem solid #E3EFFF;
     border-radius: 100%;
     position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, 0);
-
+    left: -7rem;
+    top: 50%;
+    transform: translate(0, -50%);
+    cursor: pointer;
 }
 .focusAvatar>img{
     height: 100%;
     width: 100%;
     border-radius: 100%;
     border: .5rem solid #1F55C6;
-
 }
-
-.avatarHorizontalList{
-    display: flex;
-    align-items: center;
-    padding: 0 2rem;
-    background-color: #7FB3FF;
-    height: 80%;
-    width: 100%;
-    border-radius: 1rem;
-    justify-content: space-between;
-}
-.avatarHorizontalList>div{
-    display: flex;
-    height: 100%;
-    gap: 20%;
-    align-items: center;
-}
-.imgContainer{
-    height: 80%;
-    aspect-ratio: 1/1;
+.avatarContent{
     background-color: #5A8AD6;
-    border-radius: 1rem;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    color: #E3EFFF;
-    font-size: 400%;
-    font-weight: 900;
-}
-.avatarHorizontalList img{
-    height: 90%;
     width: 90%;
+    align-items: center;
+    height: 80%;
     border-radius: .5rem;
+    font-size: 450%;
+    color: white;
+    font-weight: bolder;
+    padding: 0 5%;
+    cursor: pointer;
 }
+
+
+
 .inputFieldContainer{
     width: 100%;
     gap: 2rem;
@@ -155,19 +145,24 @@
 .container .buttons{
     display: flex;
     justify-content: space-between;
+    gap: 10%;
 
 }
 .buttons>button{
     margin-top: 2rem;
-    width: 45%;
+    flex-grow: 1;
     font-size: 1.5rem;
     padding: .5rem 0;
     border-radius: 8px;
     color: white;
+    cursor: pointer;
 }
 .buttons>button:nth-child(1){
-    background-color: #5A8AD6;
+    background-color: rgb(243, 98, 98);
 }
 .buttons>button:nth-child(2){
+    background-color: #5A8AD6;
+}
+.buttons>button:nth-child(3){
     background-color: #2755B2;
 }

@@ -11,6 +11,6 @@ export default ({noText})=>{
         altImg = imgGallery.logo.alt
     }
     return(
-        <img style={{cursor:"pointer"}} onClick={()=>navigate('/menu')} src={srcImg} alt={altImg} />
+        <img style={{cursor:"pointer"}} onClick={()=>navigate('/perfil')} src={srcImg} alt={altImg} />
     )
 }
