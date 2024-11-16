@@ -1,19 +1,22 @@
 import React, { useState, forwardRef, useImperativeHandle } from 'react';
 import styles from '../css/Cadastro.module.css'
+import imgGallery from '../importsGallery.json';
 import { postProfissional } from '/funcoes';
 
 const Profissional = forwardRef((props, ref) => {
-    
-    const [showPassIcon, setShowPassIcon] = useState("./src/assets/offshowpass.png");
+    const hidePassIcon = (imgGallery.hidePass);
+    const showPassIcon = (imgGallery.showPass);
+    const [passIcon, setPassIcon] = useState(hidePassIcon);
+
     const [currentVisibilityState, setCurrentVisibilityState] = useState('password');
-    const [login, setLogin] = useState("teste@email");
-    const [nome, setNome] = useState("muriloAlgumaCoisa");
-    const [nascimento, setNascimento] = useState("2007-05-15");
-    const [senha, setSenha] = useState("12345678");
-    const [confirmPassword, setConfirmPassword] = useState("12345678");
+    const [login, setLogin] = useState("");
+    const [nome, setNome] = useState("");
+    const [nascimento, setNascimento] = useState("");
+    const [senha, setSenha] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
     const [foto, setFoto] = useState('');
-    const [cpf, setCpf] = useState('12345678910');
-    const [crp, setCrp] = useState('11111111');
+    const [cpf, setCpf] = useState('');
+    const [crp, setCrp] = useState('');
 
 
 
@@ -21,10 +24,10 @@ const Profissional = forwardRef((props, ref) => {
     function toggleShowPass() {
         if (showPass) {
             setCurrentVisibilityState('password');
-            setShowPassIcon("./src/assets/offshowpass.png");
+            setPassIcon(hidePassIcon);
         } else {
             setCurrentVisibilityState('text');
-            setShowPassIcon("./src/assets/onshowpass.png");
+            setPassIcon(showPassIcon);
         }
         showPass = !showPass;
     }
@@ -89,15 +92,21 @@ const Profissional = forwardRef((props, ref) => {
             <div><p>E-mail</p><input type="text" value={login} onChange={(e) => setLogin(e.target.value)} /></div>
             <div><p>Senha</p>
                 <input type={currentVisibilityState} value={senha} onChange={(e) => setSenha(e.target.value)} />
-                <img id="showPassIcon" onClick={toggleShowPass} src={showPassIcon} />
+                <img onClick={toggleShowPass} src={passIcon.src} alt={passIcon.alt} />
             </div>
             <div>
                 <p>Confirmar senha</p>
                 <input type={currentVisibilityState} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
-                <img id="showPassIcon" onClick={toggleShowPass} src={showPassIcon} />
+                <img onClick={toggleShowPass} src={passIcon.src} alt={passIcon.alt}/>
             </div>
             <div><p>Data de nascimento</p><input type="date" value={nascimento} onChange={(e) => setNascimento(e.target.value)} /></div>
-            <div><p>Foto</p><input type="file" onChange={(e) => setFoto(e.target.files[0])} /></div>
+            <div className={styles.fileInput}>
+                <p>Foto</p>
+                <input id='fotoFileInput' type="file" value={foto} onChange={(e) => setFoto(e.target.value)} />
+                <label htmlFor="fotoFileInput">
+                    <img src={imgGallery.uploadIcon.src} alt={imgGallery.uploadIcon.src} />
+                </label>
+            </div>
             <div><p>CPF</p><input type="number" value={cpf} onChange={(e) => setCpf(e.target.value)} /></div>
             <div><p>CRP</p><input type="number" value={crp} onChange={(e) => setCrp(e.target.value)} /></div>
         </div>

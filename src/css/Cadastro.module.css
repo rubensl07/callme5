@@ -43,12 +43,12 @@
     display: flex;
     background-color: white;
     align-items: center;
-    height: 3rem;
+    height: 5rem;
     border-radius: 34px;
     padding-right: 1rem;
 }
 .inputFieldContainer p{
-    font-size: 1.5rem;
+    font-size: 2rem;
     text-wrap: nowrap;
     background-color: #2755B2;
     display: flex;
@@ -62,7 +62,7 @@
 }
 .inputFieldContainer input{
     width: 100%;
-    font-size: 1rem;
+    font-size: 1.5rem;
     outline: none;
     border: none;
 }
@@ -136,4 +136,43 @@
 }
 
 
+.inputFieldContainer .full{
+    background-color: #2755B2;
+    padding: 0;
+}
 
+.full p{
+    width: 100%;
+    background-color: transparent;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.topSide, .bottomSide{
+    gap: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.inputFieldContainer .fileInput{
+    justify-content: space-between;
+}
+
+.inputFieldContainer .fileInput>input{
+    display: none;
+}
+.inputFieldContainer .fileInput>label{
+    height: 100%;
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputFieldContainer .fileInput>label>img{
+    height: 50%;
+}

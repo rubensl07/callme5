@@ -98,6 +98,7 @@ export default ({ onLoad }) => {
         setIdAvatar(avatar.id);
     };
 
+    
     return (
         <div className={styles.container}>
             {showAvatarList && (
@@ -107,7 +108,7 @@ export default ({ onLoad }) => {
                     onSelectAvatar={handleSelectAvatar}
                 />
             )}
-            <Sidebar />
+            <Sidebar tipoUsuario={infoUser.tipo_usuario}/>
             {showFocusImage && <ImageFocus src={srcFotoPerfil} onClose={() => setShowFocusImage(false)} />}
             {showDeleteConfirmation && (
                 <div className={styles.deleteConfirmationModal}>

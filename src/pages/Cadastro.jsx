@@ -7,7 +7,7 @@ import imgGallery from '../importsGallery.json'
 
 
 
-export default () =>{
+export default () => {
   const clienteRef = useRef(null);
   const estudanteRef = useRef(null);
   const profissionalRef = useRef(null);
@@ -38,6 +38,7 @@ export default () =>{
   };
 
   const [tipoUsuarioCriado, setTipoUsuarioCriado] = useState(1);
+
   function changeRole(role, event) {
     document.querySelectorAll(`.${styles.selecionado}`).forEach(el => {
       el.classList.remove(styles.selecionado);
@@ -51,18 +52,18 @@ export default () =>{
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        <div>
-          
+        <div className={styles.topSide}>
+          <header>
+            <img src={imgGallery.logoText.src} alt={imgGallery.logoText.alt} />
+            <h2>Para quando o mundo parecer turbulento</h2>
+          </header>
+          <ul>
+            <li onClick={(e) => changeRole(1, e)} className={`${styles.selecionado}`}>Quero desabafar</li>
+            <li onClick={(e) => changeRole(2, e)} className={``}>Estudo psicologia</li>
+            <li onClick={(e) => changeRole(3, e)} className={``}>Sou psicólogo</li>
+          </ul>
         </div>
-        <header>
-          <img src={imgGallery.logoText.src} alt={imgGallery.logoText.alt} />
-          <h2>Para quando o mundo parecer turbulento</h2>
-        </header>
-        <ul className={styles.ul}>
-          <li onClick={(e) => changeRole(1, e)} className={`${styles.selecionado}`}>Quero desabafar</li>
-          <li onClick={(e) => changeRole(2, e)} className={``}>Estudo psicologia</li>
-          <li onClick={(e) => changeRole(3, e)} className={``}>Sou psicólogo</li>
-        </ul>
+
         <main>
           {tipoUsuarioCriado === 1 ? (
             <Cliente ref={clienteRef} styles={styles} />
@@ -74,16 +75,28 @@ export default () =>{
         </main>
 
 
-        <div className={`${styles.checkboxField}`}>
-          <input type="checkbox" id="checkbox" />
-          <label htmlFor="checkbox">Aceito os <span>termos e condições</span>.</label>
+        <div className={styles.bottomSide}>
+          <div className={`${styles.checkboxField}`}>
+            <input type="checkbox" id="checkboxValidate" />
+            <label htmlFor="checkboxValidate">
+              Aceito os {" "}
+                <span onClick={(e)=>{
+                  e.preventDefault()
+                  e.stopPropagation()
+                  }}>
+                  termos e condições
+                </span>
+                .
+            </label>
+          </div>
+
+          <button onClick={handleButtonClick}>Criar Conta</button>
         </div>
 
-        <button onClick={handleButtonClick}>Criar Conta</button>
       </div>
       <aside className={styles.aside}>
         <p>Junte-se a nós, cadastre-se agora!</p>
-        <img src={imagemMacallme.src} alt={imagemMacallme.alt} />
+        <img src={imagemMacallme.src} alt={imagemMacallme.alt}/>
       </aside>
     </div>
   );

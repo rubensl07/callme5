@@ -1,19 +1,21 @@
-import React from 'react';
 import styles from '../css/Sidebar.module.css';
 import imgGallery from '../importsGallery.json';
+import { useNavigate } from 'react-router-dom';
 import { width } from '@fortawesome/free-solid-svg-icons/fa0';
 import CallmeLogo from './CallmeLogo';
 
-export default ({ tipoUsuario, navigateToNotas, navigateToChat, navigateToAjuda, navigateToEstatistica, navigateToDoacao }) => {
+export default ({ tipoUsuario }) => {
+  const navigate = useNavigate();
+
   const imgGalleryNav = imgGallery.nav
   const pageList = [
-    { nome: "Notas", onClick: navigateToNotas, imgSrc: imgGalleryNav.nota.src },
-    { nome: "Chat", onClick: navigateToChat, imgSrc: imgGalleryNav.chat.src },
-    { nome: "Autoajuda", onClick: navigateToAjuda, imgSrc: imgGalleryNav.autoajuda.src },
+    { nome: "Notas", onClick: ()=>{navigate('/notas')}, imgSrc: imgGalleryNav.nota.src },
+    { nome: "Chat", onClick: ()=>{navigate('/chat')}, imgSrc: imgGalleryNav.chat.src },
+    { nome: "Autoajuda", onClick: ()=>{navigate('/autoajuda')}, imgSrc: imgGalleryNav.autoajuda.src },
     tipoUsuario === 1 ?
-      { nome: "Diário" } :
-      { nome: "Estatísticas", onClick: navigateToEstatistica, imgSrc: imgGalleryNav.estatistica.src },
-    { nome: "Doação", onClick: navigateToDoacao, imgSrc: imgGalleryNav.doacao.src },
+      { nome: "Diário", onClick: ()=>{navigate('/diario')}, imgSrc: imgGalleryNav.diario.src }:
+      { nome: "Estatísticas", onClick: ()=>{navigate('/estatistica')}, imgSrc: imgGalleryNav.estatistica.src },
+    { nome: "Doação",  onClick: ()=>{navigate('/doacao')}, imgSrc: imgGalleryNav.doacao.src },
   ];
 const sidebarSize='7vw'
   return (<>

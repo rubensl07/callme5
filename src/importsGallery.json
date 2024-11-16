@@ -19,6 +19,10 @@
         "src": "/src/img/lock.png",
         "alt": "Cadeado"
     },
+    "uploadIcon":{
+        "src": "/src/img/upload.png",
+        "alt": "Upload"
+    },
     "nav":{
         "autoajuda":{
             "src": "./src/img/autoajuda.png",

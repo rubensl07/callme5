@@ -1,10 +1,11 @@
 import React, { useState, forwardRef, useImperativeHandle } from 'react';
 import styles from '../css/Cadastro.module.css'
+import imgGallery from '../importsGallery.json';
 import { postCliente } from '/funcoes';
 
 const Cliente = forwardRef((props, ref) => {
-    const hidePassIcon = ("./src/img/offshowpass.png");
-    const showPassIcon = ("./src/img/onshowpass.png");
+    const hidePassIcon = (imgGallery.hidePass);
+    const showPassIcon = (imgGallery.showPass);
     const [passIcon, setPassIcon] = useState(hidePassIcon);
 
     const [currentVisibilityState, setCurrentVisibilityState] = useState('password');
@@ -78,15 +79,15 @@ const Cliente = forwardRef((props, ref) => {
             <div><p>E-mail</p><input type="text" value={login} onChange={(e) => setLogin(e.target.value)} /></div>
             <div><p>Senha</p>
                 <input type={currentVisibilityState} value={senha} onChange={(e) => setSenha(e.target.value)} />
-                <img id="showPassIcon" onClick={toggleShowPass} src={passIcon} />
+                <img onClick={toggleShowPass} src={passIcon.src} alt={passIcon.alt} />
             </div>
             <div>
                 <p>Confirmar senha</p>
                 <input type={currentVisibilityState} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
-                <img id="showPassIcon" onClick={toggleShowPass} src={passIcon} />
+                <img onClick={toggleShowPass} src={passIcon.src} alt={passIcon.alt}/>
             </div>
             <div><p>Data de nascimento</p><input type="date" value={nascimento} onChange={(e) => setNascimento(e.target.value)} /></div>
-            <div><p>Avatar</p></div>
+            <div className={styles.full}><p>Avatar</p></div>
         </div>)    
 
     
