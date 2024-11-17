@@ -1,9 +1,14 @@
-import React, { useState, forwardRef, useImperativeHandle } from 'react';
-import styles from '../css/Cadastro.module.css'
+import React, { useState, forwardRef, useImperativeHandle, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import imgGallery from '../importsGallery.json';
-import { postEstudante } from '/funcoes';
+import { postEstudante,validarEmail } from '/funcoes';
+import {AuthContext} from '../../Contexts/AuthContext';
 
-const Estudante = forwardRef((props, ref) => {
+const Estudante = forwardRef((props, ref) => {    
+    const { styles, checkboxState } = props;
+    const { setAuth } = useContext(AuthContext);
+    const navigate = useNavigate();
+
     const hidePassIcon = (imgGallery.hidePass);
     const showPassIcon = (imgGallery.showPass);
     const [passIcon, setPassIcon] = useState(hidePassIcon);
@@ -17,8 +22,6 @@ const Estudante = forwardRef((props, ref) => {
     const [foto, setFoto] = useState('');
     const [cpf, setCpf] = useState('12345678910');
     const [comprovanteEscolaridade, setComprovanteEscolaridade] = useState('');
-
-
 
     let showPass = false;
     function toggleShowPass() {
@@ -37,13 +40,35 @@ const Estudante = forwardRef((props, ref) => {
     }));
 
     const handleRegister = async () => {
-
-        const dados = { nome, login, senha, nascimento, foto: "teste", cpf, comprovanteEscolaridade };
         let validateStatus = true;
 
+        if(validateStatus && (!login || !nome || !nascimento || !senha || !confirmPassword || !cpf)){
+            validateStatus = false;
+            alert("Todos os campos devem ser preenchidos")
+        }
+        if(validateStatus && !validarEmail(login)){                 
+            validateStatus = false;
+            alert("E-mail inválido")
+        }
         if (validateStatus && senha !== confirmPassword) {
             validateStatus = false;
             alert("As senhas não coincidem!");
+        }
+        if(validateStatus && !(/\d/.test(senha))){
+            validateStatus = false;
+            alert("Senha deve conter um número");
+        }
+        if(validateStatus && !(/[a-z]/.test(senha))){
+            validateStatus = false;
+            alert("Senha deve conter uma letra minúscula");
+        }
+        if(validateStatus && !(/[A-Z]/.test(senha))){
+            validateStatus = false;
+            alert("Senha deve conter uma letra maiúscula");
+        }
+        if(validateStatus && !(/[^A-Za-z0-9]/.test(senha))){
+            validateStatus = false;
+            alert("Senha deve conter um caractere especial");
         }
         if (validateStatus && senha.length < 8) {
             validateStatus = false;
@@ -53,27 +78,53 @@ const Estudante = forwardRef((props, ref) => {
             validateStatus = false;
             alert("Senha muito longa");
         }
-        if (validateStatus && nascimento.length !== 10) {
-            validateStatus = false;
-            alert("Nascimento Indefinido");
-        }
-        if (validateStatus && foto.length > 300) {
-            validateStatus = false;
-            alert("Avatar Indefinido");
-        }
         if (validateStatus && cpf.length != 11) {
             validateStatus = false;
             alert("CPF recusado");
         }
+        if (validateStatus && nascimento.length !== 10) {
+            validateStatus = false;
+            alert("Nascimento Indefinido");
+        }
+        if (validateStatus && (avatar.id ==null ||isNaN(avatar.id))) {
+            validateStatus = false;
+            alert("Avatar Indefinido");
+        }
+        if (validateStatus && !checkboxState) {
+            validateStatus = false;
+            alert("Para se registrar na aplicação é necessário aceitar os termos");
+        }
 
         try {
+            const dados = { nome, login, senha, nascimento, foto: "teste", cpf, comprovanteEscolaridade };
             if (validateStatus) {
                 let response = await postEstudante(dados);
-                if (response.success) {
+                if (response?.success) {
+                    const responseData = response.data
+                    const responseDataDados = responseData.dados                                        
+                    const dadosUser = {
+                        id: responseData.idCriadoUsuario,
+                        foto: responseDataDados.foto,
+                        login:responseDataDados.login,
+                        nome:responseDataDados.nome,
+                        data_nascimento:responseDataDados.nascimento,
+                        cpf:responseDataDados.cpf,
+                        tipo_usuario: 2
+                    }
+                    console.log(tipo_usuario);
+                    
+                    setAuth({
+                        isAuthenticated: true,
+                        user: dadosUser
+                      }); 
+                    navigate('/perfil'); 
                     alert("Cadastro realizado com sucesso!");
-                    console.log(response);
                 } else {
-                    alert(`Erro: Falha ao cadastrar.`);
+                    if(response.data.status_code==409){
+                        alert(`Já existe um usuário cadastrado com esse e-mail`);
+                    } else {
+                        alert(`Erro: Falha ao cadastrar.`);
+                    }
                 }
             }
         } catch (error) {

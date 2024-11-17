@@ -43,11 +43,12 @@ export default () => {
 
       if (response?.success) {
         const dadosUser = await getUsuario(response.data.id);
+        delete dadosUser.senha
         setAuth({
           isAuthenticated: true,
           user: dadosUser
-        });
-        navigate('/perfil'); // Navigate after successful login
+        });        
+        navigate('/perfil'); 
         alert("Logado com sucesso");
       }
     }

@@ -28,10 +28,10 @@
 .container main{
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-grow: 1;
     width: 100%;
     padding: 0 2%;
-    align-items: center;
-    margin-bottom: 5%;
 }
 .inputFieldContainer{
     display: grid;
@@ -43,12 +43,12 @@
     display: flex;
     background-color: white;
     align-items: center;
-    height: 5rem;
+    height: 3rem;
     border-radius: 34px;
     padding-right: 1rem;
 }
 .inputFieldContainer p{
-    font-size: 2rem;
+    font-size: 1.5rem;
     text-wrap: nowrap;
     background-color: #2755B2;
     display: flex;
@@ -77,6 +77,8 @@
     grid-template-columns: 1fr 1fr 1fr;
     border-radius: 10px;
     height: 4rem;
+    box-shadow: -4px 5px 20px rgba(0, 0, 0, 0.4);
+
 }
 .container li{
     font-size: 1.5em;

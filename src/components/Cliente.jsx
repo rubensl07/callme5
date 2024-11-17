@@ -1,20 +1,25 @@
-import React, { useState, forwardRef, useImperativeHandle } from 'react';
-import styles from '../css/Cadastro.module.css'
+import React, { useState, forwardRef, useImperativeHandle, useContext} from 'react';
+import { useNavigate } from 'react-router-dom';
 import imgGallery from '../importsGallery.json';
-import { postCliente } from '/funcoes';
+import { postCliente, validarEmail } from '/funcoes';
+import {AuthContext} from '../../Contexts/AuthContext';
 
 const Cliente = forwardRef((props, ref) => {
+    const { styles, checkboxState, setShowAvatarList, avatar} = props;
+    const { setAuth } = useContext(AuthContext);
+    const navigate = useNavigate();
+    
+
     const hidePassIcon = (imgGallery.hidePass);
     const showPassIcon = (imgGallery.showPass);
     const [passIcon, setPassIcon] = useState(hidePassIcon);
 
     const [currentVisibilityState, setCurrentVisibilityState] = useState('password');
-    const [login, setLogin] = useState("teste@email");
-    const [nome, setNome] = useState("muriloAlgumaCoisa");
-    const [nascimento, setNascimento] = useState("2007-05-15");
-    const [senha, setSenha] = useState("12345678");
-    const [confirmPassword, setConfirmPassword] = useState("12345678");
-    const [idAvatar, setIdAvatar] = useState(1);
+    const [login, setLogin] = useState("");
+    const [nome, setNome] = useState("");
+    const [nascimento, setNascimento] = useState("");
+    const [senha, setSenha] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
 
     let showPass = false;
     function toggleShowPass() {
@@ -33,12 +38,35 @@ const Cliente = forwardRef((props, ref) => {
     }));
 
     const handleRegister = async () => {
-        const dados = { nome, login, senha, nascimento, idAvatar };
         let validateStatus = true;
 
+        if(validateStatus && (!login || !nome || !nascimento || !senha || !confirmPassword)){
+            validateStatus = false;
+            alert("Todos os campos devem ser preenchidos")
+        }
+        if(validateStatus && !validarEmail(login)){                 
+            validateStatus = false;
+            alert("E-mail inválido")
+        }
         if (validateStatus && senha !== confirmPassword) {
             validateStatus = false;
             alert("As senhas não coincidem!");
+        }
+        if(validateStatus && !(/\d/.test(senha))){
+            validateStatus = false;
+            alert("Senha deve conter um número");
+        }
+        if(validateStatus && !(/[a-z]/.test(senha))){
+            validateStatus = false;
+            alert("Senha deve conter uma letra minúscula");
+        }
+        if(validateStatus && !(/[A-Z]/.test(senha))){
+            validateStatus = false;
+            alert("Senha deve conter uma letra maiúscula");
+        }
+        if(validateStatus && !(/[^A-Za-z0-9]/.test(senha))){
+            validateStatus = false;
+            alert("Senha deve conter um caractere especial");
         }
         if (validateStatus && senha.length < 8) {
             validateStatus = false;
@@ -52,19 +80,43 @@ const Cliente = forwardRef((props, ref) => {
             validateStatus = false;
             alert("Nascimento Indefinido");
         }
-        if (validateStatus && isNaN(idAvatar)) {
+        if (validateStatus && (avatar.id ==null ||isNaN(avatar.id))) {
             validateStatus = false;
             alert("Avatar Indefinido");
         }
+        if (validateStatus && !checkboxState) {
+            validateStatus = false;
+            alert("Para se registrar na aplicação é necessário aceitar os termos");
+        }
 
         try {
+            const dados = { nome, login, senha, nascimento, idAvatar:avatar.id };
             if (validateStatus) {
                 let response = await postCliente(dados);
-                if (response.success) {
+                if (response?.success) {
+                    const responseData = response.data
+                    const responseDataDados = responseData.dados                                        
+                    const dadosUser = {
+                        id: responseData.idCriadoUsuario,
+                        foto: responseDataDados.foto,
+                        id_avatar:responseDataDados.idAvatar,
+                        login:responseDataDados.login,
+                        nome:responseDataDados.nome,
+                        data_nascimento:responseDataDados.nascimento,
+                        tipo_usuario: 1
+                    }                    
+                    setAuth({
+                      isAuthenticated: true,
+                      user: dadosUser
+                    });        
+                    navigate('/perfil'); 
                     alert("Cadastro realizado com sucesso!");
-                    console.log(response);
-                } else {
-                    alert(`Erro: Falha ao cadastrar.`);
+                  } else {
+                    if(response.data.status_code==409){
+                        alert(`Já existe um usuário cadastrado com esse e-mail`);
+                    } else {
+                        alert(`Erro: Falha ao cadastrar.`);
+                    }
                 }
             }
         } catch (error) {
@@ -87,7 +139,9 @@ const Cliente = forwardRef((props, ref) => {
                 <img onClick={toggleShowPass} src={passIcon.src} alt={passIcon.alt}/>
             </div>
             <div><p>Data de nascimento</p><input type="date" value={nascimento} onChange={(e) => setNascimento(e.target.value)} /></div>
-            <div className={styles.full}><p>Avatar</p></div>
+            {/* <div onClick={()=>setIdAvatar(e)} className={styles.full}><p>Avatar</p></div> */}
+            <div onClick={()=>(setShowAvatarList(true))} className={styles.full}><p>Avatar</p></div>
+
         </div>)    
 
     

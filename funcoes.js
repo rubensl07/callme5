@@ -204,9 +204,7 @@ export function validarSenha(value) {
   }
 }
 
-export function validarEmail(email) {
-  console.log(email);
-  
+export function validarEmail(email) {  
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;  
   return regex.test(email);
 }

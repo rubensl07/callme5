@@ -15,8 +15,14 @@ import Profile from '/src/pages/Profile.jsx';
 import Menu from '/src/pages/Menu.jsx';
 import DefaultPage from '/src/pages/DefaultPage.jsx';  
 
-export default () => {
-  const { auth } = useContext(AuthContext);  
+const App = () => {
+  const { auth } = React.useContext(AuthContext); // Access auth context
+
+  // Private Route Wrapper
+  const PrivateRoute = ({ children }) => {
+    return auth.isAuthenticated ? children : <Navigate to="/login" />;
+  };  
+    
 
   return (
     <BrowserRouter>
@@ -29,14 +35,16 @@ export default () => {
         <Route path="/passwordRecoveryNewPass" element={<PasswordRecovery2 />} />
 
         {/* Private Routes (Authenticated Users Only) */}
-        <Route path="/menu" element={auth.isAuthenticated ? <Menu /> : <Navigate to="/" />} />
-        <Route path="/notas" element={auth.isAuthenticated ? <Notas /> : <Navigate to="/" />} />
-        <Route path="/chat" element={auth.isAuthenticated ? <ChatScreen /> : <Navigate to="/" />} />
-        <Route path="/ajuda" element={auth.isAuthenticated ? <AjudaScreen /> : <Navigate to="/" />} />
-        <Route path="/estatistica" element={auth.isAuthenticated ? <Estatistica /> : <Navigate to="/" />} />
-        <Route path="/doacao" element={auth.isAuthenticated ? <Doacao /> : <Navigate to="/" />} />
-        <Route path="/perfil" element={auth.isAuthenticated ? <Profile /> : <Navigate to="/" />} />
+        <Route path="/menu" element={<PrivateRoute><Menu /></PrivateRoute>} />
+        <Route path="/notas" element={<PrivateRoute><Notas /></PrivateRoute>} />
+        <Route path="/chat" element={<PrivateRoute><ChatScreen /></PrivateRoute>} />
+        <Route path="/autoajuda" element={<PrivateRoute><AjudaScreen /></PrivateRoute>} />
+        <Route path="/estatistica" element={<PrivateRoute><Estatistica /></PrivateRoute>} />
+        <Route path="/doacao" element={<PrivateRoute><Doacao /></PrivateRoute>} />
+        <Route path="/perfil" element={<PrivateRoute><Profile /></PrivateRoute>} />
       </Routes>
     </BrowserRouter>
   );
 };
+
+export default App;

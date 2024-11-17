@@ -1,9 +1,10 @@
 import React, { useState, forwardRef, useImperativeHandle } from 'react';
-import styles from '../css/Cadastro.module.css'
 import imgGallery from '../importsGallery.json';
 import { postProfissional } from '/funcoes';
 
-const Profissional = forwardRef((props, ref) => {
+export default forwardRef((props, ref) => {
+    const { styles, checkboxState } = props;
+
     const hidePassIcon = (imgGallery.hidePass);
     const showPassIcon = (imgGallery.showPass);
     const [passIcon, setPassIcon] = useState(hidePassIcon);
@@ -113,4 +114,3 @@ const Profissional = forwardRef((props, ref) => {
     );
 });
 
-export default Profissional;

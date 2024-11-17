@@ -1,13 +1,37 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Cliente from "../components/Cliente";
 import Estudante from "../components/Estudante";
 import Profissional from "../components/Profissional";
 import styles from '../css/Cadastro.module.css'
 import imgGallery from '../importsGallery.json'
+import AvatarList from "../components/avatarList";
+import { getAvatares } from "../../funcoes";
 
 
 
-export default () => {
+export default ({onLoad}) => {
+  const [checkboxState, setCheckboxState] = useState(false);
+  const [showAvatarList,setShowAvatarList] = useState(false)
+  const [listaAvatares, setListaAvatares] = useState([]);
+  const [avatar, setAvatar] = useState({src:null,id:null});
+  useEffect(() => {
+    const obterAvatares = async () => {
+        try {
+            const data = await getAvatares();
+            setListaAvatares(data || []);
+        } catch (error) {
+            console.error("Erro ao obter avatares:", error);
+        }
+    };
+    obterAvatares();
+}, [onLoad]);
+
+
+const handleSelectAvatar = (avatar) => {   
+  setAvatar(avatar);
+};
+
+
   const clienteRef = useRef(null);
   const estudanteRef = useRef(null);
   const profissionalRef = useRef(null);
@@ -47,10 +71,18 @@ export default () => {
     setTipoUsuarioCriado(role);
   }
 
+
   const imagemMacallme = imgGallery.macallme.macallmeHugging
 
   return (
     <div className={styles.container}>
+                              {showAvatarList && (
+                <AvatarList
+                    listaAvatares={listaAvatares}
+                    onClose={() => setShowAvatarList(false)}
+                    onSelectAvatar={handleSelectAvatar}
+                />
+            )}
       <div className={styles.content}>
         <div className={styles.topSide}>
           <header>
@@ -66,18 +98,19 @@ export default () => {
 
         <main>
           {tipoUsuarioCriado === 1 ? (
-            <Cliente ref={clienteRef} styles={styles} />
+            <Cliente avatar={avatar} ref={clienteRef} checkboxState = {checkboxState} styles={styles} setShowAvatarList={setShowAvatarList}/>
           ) : tipoUsuarioCriado === 2 ? (
-            <Estudante ref={estudanteRef} styles={styles} />
+            <Estudante ref={estudanteRef} checkboxState = {checkboxState} styles={styles} />
           ) : (
-            <Profissional ref={profissionalRef} styles={styles} />
+            <Profissional ref={profissionalRef} checkboxState = {checkboxState} styles={styles} />
           )}
         </main>
 
 
         <div className={styles.bottomSide}>
           <div className={`${styles.checkboxField}`}>
-            <input type="checkbox" id="checkboxValidate" />
+            <input checked={checkboxState} onChange={(e)=>{setCheckboxState(e.target.checked)}}
+            type="checkbox" id="checkboxValidate" />
             <label htmlFor="checkboxValidate">
               Aceito os {" "}
                 <span onClick={(e)=>{

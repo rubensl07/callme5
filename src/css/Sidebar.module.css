@@ -26,6 +26,12 @@
     align-items: center;
     justify-content: space-evenly;
   }
+  .iconDiv{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   .icon{
     background-color: #7FB3FF;
     display: flex;
@@ -39,6 +45,14 @@
   .icon>img{
     width: 50%;
   }
-
+  .point{
+    position: absolute;
+    right: 0;
+      width: 0;
+      height: 0;
+      border-top: 30px solid transparent;
+      border-bottom: 30px solid transparent;
+      border-right: 20px solid #E3EFFF;
+  }
 
   

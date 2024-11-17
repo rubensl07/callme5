@@ -77,7 +77,6 @@ export default ({ onLoad }) => {
                     foto: srcFotoPerfil
                 };
 
-                // Update the context state immutably
                 setAuth(prevState => ({
                     ...prevState,
                     user: { ...prevState.user, ...dadosAtualizados }
