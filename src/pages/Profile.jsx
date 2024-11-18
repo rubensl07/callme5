@@ -45,18 +45,17 @@ export default ({ onLoad }) => {
     };
 
     const handleExclude = () => {
-        setShowDeleteConfirmation(true); // Show confirmation modal
+        setShowDeleteConfirmation(true); 
     };
 
     const confirmDelete = async () => {
-        // Add API call for account deletion if needed here
         setShowDeleteConfirmation(false);
         handleLogout();
         alert("Conta excluída com sucesso.");
     };
 
     const cancelDelete = () => {
-        setShowDeleteConfirmation(false); // Close confirmation modal
+        setShowDeleteConfirmation(false); 
     };
 
     const handleUpdate = async () => {
@@ -83,7 +82,6 @@ export default ({ onLoad }) => {
                 }));
 
                 alert("Perfil modificado com sucesso.");
-                console.log(response);
             } else {
                 alert("Ocorreu um erro");
             }

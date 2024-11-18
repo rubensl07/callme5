@@ -1,10 +1,10 @@
 import React, { useState, forwardRef, useImperativeHandle, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import imgGallery from '../importsGallery.json';
-import { postEstudante,validarEmail } from '/funcoes';
-import {AuthContext} from '../../Contexts/AuthContext';
+import { postEstudante, validarEmail } from '/funcoes';
+import { AuthContext } from '../../Contexts/AuthContext';
 
-const Estudante = forwardRef((props, ref) => {    
+const Estudante = forwardRef((props, ref) => {
     const { styles, checkboxState } = props;
     const { setAuth } = useContext(AuthContext);
     const navigate = useNavigate();
@@ -14,14 +14,16 @@ const Estudante = forwardRef((props, ref) => {
     const [passIcon, setPassIcon] = useState(hidePassIcon);
 
     const [currentVisibilityState, setCurrentVisibilityState] = useState('password');
-    const [login, setLogin] = useState("teste@email");
+    const [login, setLogin] = useState("teste@email.com");
     const [nome, setNome] = useState("muriloAlgumaCoisa");
     const [nascimento, setNascimento] = useState("2007-05-15");
-    const [senha, setSenha] = useState("12345678");
-    const [confirmPassword, setConfirmPassword] = useState("12345678");
-    const [foto, setFoto] = useState('');
+    const [senha, setSenha] = useState("12345678aA@");
+    const [confirmPassword, setConfirmPassword] = useState("12345678aA@");
+    const [foto, setFoto] = useState(null);
+    const [declaracaoEscolaridade, setDeclaracaoEscolaridade] = useState(null);
     const [cpf, setCpf] = useState('12345678910');
-    const [comprovanteEscolaridade, setComprovanteEscolaridade] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
+
 
     let showPass = false;
     function toggleShowPass() {
@@ -39,93 +41,106 @@ const Estudante = forwardRef((props, ref) => {
         handleRegister
     }));
 
+    const handleFotoChange = (e) => {
+        setFoto(e.target.files[0]);
+    };
+    const handleDeclaracaoEscolaridadeChange = (e) => {
+        setDeclaracaoEscolaridade(e.target.files[0]);
+    };
+
     const handleRegister = async () => {
-        let validateStatus = true;
-
-        if(validateStatus && (!login || !nome || !nascimento || !senha || !confirmPassword || !cpf)){
-            validateStatus = false;
-            alert("Todos os campos devem ser preenchidos")
-        }
-        if(validateStatus && !validarEmail(login)){                 
-            validateStatus = false;
-            alert("E-mail inválido")
-        }
-        if (validateStatus && senha !== confirmPassword) {
-            validateStatus = false;
-            alert("As senhas não coincidem!");
-        }
-        if(validateStatus && !(/\d/.test(senha))){
-            validateStatus = false;
-            alert("Senha deve conter um número");
-        }
-        if(validateStatus && !(/[a-z]/.test(senha))){
-            validateStatus = false;
-            alert("Senha deve conter uma letra minúscula");
-        }
-        if(validateStatus && !(/[A-Z]/.test(senha))){
-            validateStatus = false;
-            alert("Senha deve conter uma letra maiúscula");
-        }
-        if(validateStatus && !(/[^A-Za-z0-9]/.test(senha))){
-            validateStatus = false;
-            alert("Senha deve conter um caractere especial");
-        }
-        if (validateStatus && senha.length < 8) {
-            validateStatus = false;
-            alert("Senha muito curta");
-        }
-        if (validateStatus && senha.length > 64) {
-            validateStatus = false;
-            alert("Senha muito longa");
-        }
-        if (validateStatus && cpf.length != 11) {
-            validateStatus = false;
-            alert("CPF recusado");
-        }
-        if (validateStatus && nascimento.length !== 10) {
-            validateStatus = false;
-            alert("Nascimento Indefinido");
-        }
-        if (validateStatus && (avatar.id ==null ||isNaN(avatar.id))) {
-            validateStatus = false;
-            alert("Avatar Indefinido");
-        }
-        if (validateStatus && !checkboxState) {
-            validateStatus = false;
-            alert("Para se registrar na aplicação é necessário aceitar os termos");
-        }
-
         try {
-            const dados = { nome, login, senha, nascimento, foto: "teste", cpf, comprovanteEscolaridade };
-            if (validateStatus) {
-                let response = await postEstudante(dados);
-                if (response?.success) {
-                    const responseData = response.data
-                    const responseDataDados = responseData.dados                                        
+
+            if ((!login || !nome || !nascimento || !senha || !confirmPassword || !cpf)) {
+                alert("Todos os campos devem ser preenchidos")
+            }
+            if (!validarEmail(login)) {
+                alert("E-mail inválido")
+                return;
+            }
+            if (senha !== confirmPassword) {
+                alert("As senhas não coincidem!");
+                return;
+            }
+            if (!(/\d/.test(senha))) {
+                alert("Senha deve conter um número");
+                return;
+            }
+            if (!(/[a-z]/.test(senha))) {
+                alert("Senha deve conter uma letra minúscula");
+                return;
+            }
+            if (!(/[A-Z]/.test(senha))) {
+                alert("Senha deve conter uma letra maiúscula");
+                return;
+            }
+            if (!(/[^A-Za-z0-9]/.test(senha))) {
+                alert("Senha deve conter um caractere especial");
+                return;
+            }
+            if (senha.length < 8) {
+                alert("Senha muito curta");
+                return;
+            }
+            if (senha.length > 64) {
+                alert("Senha muito longa");
+                return;
+            }
+            if (cpf.length != 11) {
+                alert("CPF recusado");
+                return;
+            }
+            if (nascimento.length !== 10) {
+                alert("Nascimento Indefinido");
+                return;
+            }
+            if ((!foto)) {
+                alert("Foto indefinida");
+                return;
+            }
+            if ((!declaracaoEscolaridade)) {
+                alert("Declaração de escolaridade indefinida");
+                return;
+            }
+            if (!checkboxState) {
+                alert("Para se registrar na aplicação é necessário aceitar os termos");
+                return;
+            }
+                setIsLoading(true);
+                const formData = new FormData();
+                formData.append('nome', nome);
+                formData.append('login', login);
+                formData.append('senha', senha);
+                formData.append('nascimento', nascimento);
+                formData.append('cpf', cpf);
+                formData.append('fotoPerfil', foto);
+                formData.append('declaracaoEscolaridade', declaracaoEscolaridade);
+
+                let result = await postEstudante(formData);
+                if (result?.success) {
                     const dadosUser = {
-                        id: responseData.idCriadoUsuario,
-                        foto: responseDataDados.foto,
-                        login:responseDataDados.login,
-                        nome:responseDataDados.nome,
-                        data_nascimento:responseDataDados.nascimento,
-                        cpf:responseDataDados.cpf,
+                        id: result.data.idCriadoUsuario,
+                        foto: result.data.dados.foto,
+                        login: result.data.dados.login,
+                        nome: result.data.dados.nome,
+                        data_nascimento: result.data.dados.nascimento,
+                        cpf: result.data.dados.cpf,
+                        declaracaoEscolaridade: result.data.dados.declaracaoEscolaridade,
                         tipo_usuario: 2
                     }
-                    console.log(tipo_usuario);
-                    
+
                     setAuth({
                         isAuthenticated: true,
                         user: dadosUser
-                      }); 
-                    navigate('/perfil'); 
+                    });
+                    navigate('/perfil');
                     alert("Cadastro realizado com sucesso!");
                 } else {
-                    if(response.data.status_code==409){
+                    if (result.data.status_code == 409) {
                         alert(`Já existe um usuário cadastrado com esse e-mail`);
                     } else {
                         alert(`Erro: Falha ao cadastrar.`);
                     }
-                }
             }
         } catch (error) {
             alert(`Erro: Falha ao cadastrar.`);
@@ -149,7 +164,8 @@ const Estudante = forwardRef((props, ref) => {
             <div><p>Data de nascimento</p><input type="date" value={nascimento} onChange={(e) => setNascimento(e.target.value)} /></div>
             <div className={styles.fileInput}>
                 <p>Foto</p>
-                <input id='fotoFileInput' type="file" value={foto} onChange={(e) => setFoto(e.target.value)} />
+                
+                <input id='fotoFileInput'  name="foto" type="file" accept="image/*" onChange={handleFotoChange} />
                 <label htmlFor="fotoFileInput">
                     <img src={imgGallery.uploadIcon.src} alt={imgGallery.uploadIcon.src} />
                 </label>
@@ -157,8 +173,8 @@ const Estudante = forwardRef((props, ref) => {
             <div><p>CPF</p><input type="number" value={cpf} onChange={(e) => setCpf(e.target.value)} /></div>
             <div className={styles.fileInput}>
                 <p>Comprovante de escolaridade</p>
-                <input id='comprovanteEscolaridadeFileInput' type="file" value={comprovanteEscolaridade} onChange={(e) => setComprovanteEscolaridade(e.target.value)} />
-                <label htmlFor="comprovanteEscolaridadeFileInput">
+                <input id='declaracaoEscolaridadeFileInput' name="declaracaoEscolaridade" type="file" accept="application/pdf" onChange={handleDeclaracaoEscolaridadeChange} />
+                <label htmlFor="declaracaoEscolaridadeFileInput">
                     <img src={imgGallery.uploadIcon.src} alt={imgGallery.uploadIcon.src} />
                 </label>
             </div>

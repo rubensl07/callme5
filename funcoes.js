@@ -58,8 +58,6 @@ export async function postCliente(dados) {
   };
 
   try {
-    console.log(dados);
-
     const response = await fetch(url, options);
     const data = await response.json();
     return { success: response.ok, data };
@@ -90,24 +88,22 @@ export async function editCliente(dados,id) {
 
 export async function postEstudante(dados) {
   const url = `${link}/estudante`;
-
+  
   const options = {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(dados),
+    body: dados,
   };
-
   try {
     const response = await fetch(url, options);
     const data = await response.json();
+    console.log(data);
     return { success: response.ok, data };
   } catch (error) {
     console.error('Erro ao enviar dados: ', error);
     return { success: false, data: null };
   }
 }
+
 export async function postProfissional(dados) {
   const url = `${link}/profissional`;
 
@@ -135,7 +131,36 @@ export async function getAutoajuda() {
   const data = await response.json()
   return data.dados
 }
+export async function deleteAutoajuda(id) {
+  try{
+    await fetch(`${link}/autoajuda/${id}`, {
+      method: 'DELETE',
+    });
+    return true
+  } catch (error) {
+    console.error('Erro ao excluir autoajuda: ', error);
+    return false
+  }
+}
+export async function editAutoajuda(dados,id) {
+  const url = `${link}/autoajuda/${id}`
+  const options = {
+    method: 'PUT', 
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(dados)
+  }
 
+  try {
+      const response = await fetch(url,options)
+      const data = await response.json();
+      return { success: response.ok, data }; 
+  } catch (error) {
+    console.error('Erro ao enviar dados: ', error);
+      return { success: false, data: null }; 
+  }
+}
 export async function validateLogin(dados) {
   const url = `${link}/login`;
 
@@ -156,6 +181,8 @@ export async function validateLogin(dados) {
     return { success: false, data: null };
   }
 }
+
+
 
 export async function enviarPasswordRecovery(dados) {
   const url = `${link}/recuperacaosenha/enviaremail`;

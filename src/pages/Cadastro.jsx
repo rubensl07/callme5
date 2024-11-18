@@ -61,7 +61,7 @@ const handleSelectAvatar = (avatar) => {
     }
   };
 
-  const [tipoUsuarioCriado, setTipoUsuarioCriado] = useState(1);
+  const [tipoUsuarioCriado, setTipoUsuarioCriado] = useState(2);
 
   function changeRole(role, event) {
     document.querySelectorAll(`.${styles.selecionado}`).forEach(el => {

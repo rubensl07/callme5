@@ -57,7 +57,7 @@
     border: 5px solid #4D72DB;
 }
 
-.ajudaScreen .excluir {
+.ajudaScreen .excluir{
     background-color: #4D72DB;
     width: 20%;
     height: 20%;
@@ -138,6 +138,7 @@
 .detalhesContainer {
     display: flex;
     align-items: flex-start;
+    height: 100%;
 }
 
 .detalhesImagem {
@@ -148,14 +149,23 @@
 }
 
 .detalhesTexto {
+    width: 100%;
     display: flex;
     flex-direction: column; 
+    height: 100%;
 }
 
-.detalhesTexto h3 {
+.detalhesTexto h3, .detalhesTexto input {
+    width: 100%;
     margin-top: 10px;
     font-size: x-large;
-    width: 60%;
+}
+.detalhesTexto textarea {
+    flex-grow: 1;
+    margin-top: 10px;
+    font-size: x-large;
+    resize: none;
+
 }
 
 .detalhesTexto p {
@@ -168,4 +178,7 @@
     width: 100vw;
     height: 100vh;
     margin-left: 10%;
+}
+.ajudaScreen button{
+    cursor: pointer;
 }
