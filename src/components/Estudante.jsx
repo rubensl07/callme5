@@ -14,14 +14,14 @@ const Estudante = forwardRef((props, ref) => {
     const [passIcon, setPassIcon] = useState(hidePassIcon);
 
     const [currentVisibilityState, setCurrentVisibilityState] = useState('password');
-    const [login, setLogin] = useState("teste@email.com");
-    const [nome, setNome] = useState("muriloAlgumaCoisa");
-    const [nascimento, setNascimento] = useState("2007-05-15");
-    const [senha, setSenha] = useState("12345678aA@");
-    const [confirmPassword, setConfirmPassword] = useState("12345678aA@");
+    const [login, setLogin] = useState("");
+    const [nome, setNome] = useState("");
+    const [nascimento, setNascimento] = useState("");
+    const [senha, setSenha] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
     const [foto, setFoto] = useState(null);
     const [declaracaoEscolaridade, setDeclaracaoEscolaridade] = useState(null);
-    const [cpf, setCpf] = useState('12345678910');
+    const [cpf, setCpf] = useState('');
     const [isLoading, setIsLoading] = useState(true);
 
 

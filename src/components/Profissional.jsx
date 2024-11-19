@@ -8,7 +8,6 @@ export default forwardRef((props, ref) => {
     const hidePassIcon = (imgGallery.hidePass);
     const showPassIcon = (imgGallery.showPass);
     const [passIcon, setPassIcon] = useState(hidePassIcon);
-
     const [currentVisibilityState, setCurrentVisibilityState] = useState('password');
     const [login, setLogin] = useState("");
     const [nome, setNome] = useState("");

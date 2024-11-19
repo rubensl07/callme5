@@ -7,12 +7,17 @@ import { editCliente, getAvatares, validarEmail } from "../../funcoes.js";
 import AvatarList from "../components/avatarList.jsx";
 import ImageFocus from "../components/imageFocus.jsx";
 import { AuthContext } from "../../Contexts/AuthContext";
+import Cliente from "../components/ProfileCliente.jsx"
+import Estudante from "../components/ProfileEstudante.jsx"
+import Profissional from "../components/ProfileProfissional.jsx"
+
 
 export default ({ onLoad }) => {
     const navigate = useNavigate();
     const { auth, setAuth } = useContext(AuthContext);
     const infoUser = auth.user;
-    
+    const tipoUsuario = infoUser.tipo_usuario
+
     const [nome, setNome] = useState(infoUser.nome);
     const [email, setEmail] = useState(infoUser.login);
     const [nascimento, setNascimento] = useState(infoUser.data_nascimento.substring(0, 10));
@@ -45,7 +50,7 @@ export default ({ onLoad }) => {
     };
 
     const handleExclude = () => {
-        setShowDeleteConfirmation(true); 
+        setShowDeleteConfirmation(true);
     };
 
     const confirmDelete = async () => {
@@ -55,7 +60,7 @@ export default ({ onLoad }) => {
     };
 
     const cancelDelete = () => {
-        setShowDeleteConfirmation(false); 
+        setShowDeleteConfirmation(false);
     };
 
     const handleUpdate = async () => {
@@ -95,7 +100,7 @@ export default ({ onLoad }) => {
         setIdAvatar(avatar.id);
     };
 
-    
+
     return (
         <div className={styles.container}>
             {showAvatarList && (
@@ -105,7 +110,7 @@ export default ({ onLoad }) => {
                     onSelectAvatar={handleSelectAvatar}
                 />
             )}
-            <Sidebar tipoUsuario={infoUser.tipo_usuario}/>
+            <Sidebar tipoUsuario={infoUser.tipo_usuario} />
             {showFocusImage && <ImageFocus src={srcFotoPerfil} onClose={() => setShowFocusImage(false)} />}
             {showDeleteConfirmation && (
                 <div className={styles.deleteConfirmationModal}>
@@ -124,33 +129,36 @@ export default ({ onLoad }) => {
                     </div>
                 </div>
                 <div className={styles.inputFieldContainer}>
-                    <div className={styles.inputFields}>
-                        <div className={styles.nomeField}>
-                            <p>Nome</p>
-                            <div>
-                                <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} />
+                    <div className={styles.inputFieldContainer}>
+
+                        <div className={styles.inputFields}>
+                            <div className={styles.nomeField}>
+                                <p>Nome</p>
+                                <div>
+                                    <input type="text" value={props.nome} onChange={(e) => props.setNome(e.target.value)} />
+                                </div>
                             </div>
-                        </div>
-                        <div className={styles.emailField}>
-                            <p>E-mail</p>
-                            <div>
-                                <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+                            <div className={styles.emailField}>
+                                <p>E-mail</p>
+                                <div>
+                                    <input type="text" value={props.email} onChange={(e) => props.setEmail(e.target.value)} />
+                                </div>
                             </div>
-                        </div>
-                        <div className={styles.nascimentoField}>
-                            <p>Data de nascimento</p>
-                            <div>
-                                <input type="date" value={nascimento} onChange={(e) => setNascimento(e.target.value)} />
+                            <div className={styles.nascimentoField}>
+                                <p>Data de nascimento</p>
+                                <div>
+                                    <input type="date" value={props.nascimento} onChange={(e) => props.setNascimento(e.target.value)} />
+                                </div>
                             </div>
+                            <a className={styles.trocarSenhaField} onClick={() => props.navigate('/passwordRecoveryMailSend')}>
+                                <img src={imgGallery.lockIcon.src} alt={imgGallery.lockIcon.alt} />
+                                <p>Trocar Senha</p>
+                            </a>
+                            <a className={styles.historicoNotasField}>
+                                <img src={imgGallery.lockIcon.src} alt={imgGallery.lockIcon.alt} />
+                                <p>Ver histórico de notas</p>
+                            </a>
                         </div>
-                        <a className={styles.trocarSenhaField} onClick={() => navigate('/passwordRecoveryMailSend')}>
-                            <img src={imgGallery.lockIcon.src} alt={imgGallery.lockIcon.alt} />
-                            <p>Trocar Senha</p>
-                        </a>
-                        <a className={styles.historicoNotasField}>
-                            <img src={imgGallery.lockIcon.src} alt={imgGallery.lockIcon.alt} />
-                            <p>Ver histórico de notas</p>
-                        </a>
                     </div>
                     <div className={styles.buttons}>
                         <button onClick={handleExclude}>Excluir conta</button>
@@ -162,3 +170,13 @@ export default ({ onLoad }) => {
         </div>
     );
 };
+
+// {
+//     tipoUsuario == 1 ?
+//         <Cliente styles={styles} imgGallery={imgGallery} nome={nome} setNome={setNome} email={email} nascimento={nascimento} setNascimento={setNascimento} />
+//         :
+//         tipoUsuario == 2 ?
+//             <Estudante styles={styles} imgGallery={imgGallery} nome={nome} setNome={setNome} email={email} nascimento={nascimento} setNascimento={setNascimento} />
+//             :
+//             <Profissional styles={styles} imgGallery={imgGallery} nome={nome} setNome={setNome} email={email} nascimento={nascimento} setNascimento={setNascimento} />
+// }

@@ -13,8 +13,8 @@ export default () => {
   const imagemMacallme = imgGallery.macallme.macallmeTherapy;
   const [passIcon, setPassIcon] = useState(imgGallery.hidePass);
   const [currentVisibilityState, setCurrentVisibilityState] = useState('password');
-  const [login, setLogin] = useState("cliente10@email");
-  const [senha, setSenha] = useState("senhaTeste123");
+  const [login, setLogin] = useState("");
+  const [senha, setSenha] = useState("");
 
   let showPass = false;
 
