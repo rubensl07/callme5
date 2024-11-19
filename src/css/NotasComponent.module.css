@@ -1,25 +1,95 @@
-.container ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+.carrossel {
+    position: relative;
+    width: 70%;
+    height: 1000%;
+    margin-bottom: 10%;
+    overflow: hidden;
     display: flex;
-    justify-content: center;
     align-items: center;
-    height: 100%;
-    width: 100%;
-    margin: 5%;
-    background: none;
-}
-
-.container li {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.usuario-nota {
-    color: black;
-    text-align: center;
     font-size: xx-large;
-    font-weight: 500;
+}
+
+.carrossel .fundo {
+    position: absolute; 
+    width: 30%;
+    height: 40vh;
+    margin-left: 35%;
+    margin-bottom: 5%;
+    background-color: #BCDDFF;
+    border: 8px #020075 solid;
+    border-radius: 5%;
+    z-index: 1;
+    transform: rotate(-8deg);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.carrossel .meio {
+    position: absolute; 
+    width: 29%;
+    height: 40vh;
+    margin-left: 43%;
+    background-color: #FFFFD2;
+    border: 8px #020075 solid;
+    border-radius: 5%;
+    z-index: 1;
+    transform: rotate(-12deg);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.carrossel .carrosselContent {
+    position: relative;
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    height: 40vh; 
+    width: 30%; 
+    border: 8px #020075 solid;
+    border-radius: 5%;
+    background-color: #FEFEFE;
+    justify-content: center; 
+    align-items: center; 
+    margin-left: 40%;
+    margin-bottom: 10%;
+    z-index: 2;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.carrossel .slide {
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.carrossel button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+button.prev {
+    left: 10px;
+    background-color: transparent;
+    color: black;
+    font-size: xxx-large;
+}
+
+button.next {
+    right: 10px;
+    background-color: transparent;
+    color: #020075;
+    font-size: xxx-large;
+}
+
+.resposta {
+    background-color: red;
+    height: 50%;
+    width: 50%;
 }

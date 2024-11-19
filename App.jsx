@@ -4,7 +4,6 @@ import '/src/css/App.css';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";  
 import Login from '/src/pages/Login.jsx';
 import Cadastro from '/src/pages/Cadastro.jsx';
-import Notas from '/src/pages/Notas.jsx';
 import ChatScreen from '/src/pages/Chat.jsx';
 import AjudaScreen from '/src/pages/Autoajuda.jsx';
 import Estatistica from '/src/pages/Estatistica.jsx'; 
@@ -12,7 +11,7 @@ import Doacao from '/src/pages/Doacao.jsx';
 import PasswordRecovery1 from '/src/pages/PasswordRecoveryMailSend.jsx'; 
 import PasswordRecovery2 from '/src/pages/PasswordRecoveryNewPass.jsx'; 
 import Profile from '/src/pages/Profile.jsx';
-import Menu from '/src/pages/Menu.jsx';
+import Notas from '/src/pages/MenuScreen.jsx';
 import DefaultPage from '/src/pages/DefaultPage.jsx';  
 
 const App = () => {
@@ -35,7 +34,6 @@ const App = () => {
         <Route path="/passwordRecoveryNewPass" element={<PasswordRecovery2 />} />
 
         {/* Private Routes (Authenticated Users Only) */}
-        <Route path="/menu" element={<PrivateRoute><Menu /></PrivateRoute>} />
         <Route path="/notas" element={<PrivateRoute><Notas /></PrivateRoute>} />
         <Route path="/chat" element={<PrivateRoute><ChatScreen /></PrivateRoute>} />
         <Route path="/autoajuda" element={<PrivateRoute><AjudaScreen /></PrivateRoute>} />

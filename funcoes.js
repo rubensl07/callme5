@@ -45,6 +45,30 @@ export async function getNotas(params) {
   return data.dados
 }
 
+export async function postResposta(noteId) {
+  const url = `${link}/notasresposta/nota/${noteId}`;
+
+  const options = {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+  };
+
+  try {
+      const res = await fetch(url, options);
+      const data = await res.json();
+
+      if (!res.ok) {
+          throw new Error(data.message || 'Erro ao enviar resposta');
+      }
+
+      return { success: true, data };
+  } catch (error) {
+      console.error('Erro ao enviar resposta: ', error);
+      return { success: false, data: null, error: error.message };
+  }
+}
 
 export async function postCliente(dados) {
   const url = `${link}/cliente`;
