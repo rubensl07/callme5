@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from '../css/Profile.module.css';
 import Sidebar from "../components/Sidebar.jsx";
 import imgGallery from '../importsGallery.json';
-import { editCliente, getAvatares, validarEmail } from "../../funcoes.js";
+import { editCliente, editEstudante,editProfissional, getAvatares, validarEmail } from "../../funcoes.js";
 import AvatarList from "../components/avatarList.jsx";
 import ImageFocus from "../components/imageFocus.jsx";
 import { AuthContext } from "../../Contexts/AuthContext";
@@ -63,36 +63,77 @@ export default ({ onLoad }) => {
         setShowDeleteConfirmation(false);
     };
 
-    const handleUpdate = async () => {
+    const handleUpdate = async (tipoUsuario, dados) => {
         if (validarEmail(email)) {
-            const dados = {
-                login: email,
-                nome,
-                nascimento,
-                idAvatar
-            };
-            const response = await editCliente(dados, infoUser.id);
-            if (response.success) {
-                const dadosAtualizados = {
-                    login: dados.login,
-                    nome: dados.nome,
-                    data_nascimento: dados.nascimento,
-                    id_avatar: dados.idAvatar,
-                    foto: srcFotoPerfil
-                };
-
-                setAuth(prevState => ({
-                    ...prevState,
-                    user: { ...prevState.user, ...dadosAtualizados }
-                }));
-
-                alert("Perfil modificado com sucesso.");
-            } else {
-                alert("Ocorreu um erro");
+            if (tipoUsuario == 1) {
+                const response = await editCliente(dados, infoUser.id);
+                if (response.success) {
+                    const dadosAtualizados = {
+                        login: dados.login,
+                        nome: dados.nome,
+                        data_nascimento: dados.nascimento,
+                        id_avatar: dados.idAvatar,
+                        foto: srcFotoPerfil
+                    };
+                    setAuth(prevState => ({
+                        ...prevState,
+                        user: { ...prevState.user, ...dadosAtualizados }
+                    }));
+                    alert("Perfil modificado com sucesso.");
+                } else {
+                    alert("Ocorreu um erro");
+                }
+            }
+            if (tipoUsuario == 2) {
+                const response = await editEstudante(dados, infoUser.id);
+                if (response.success) {
+                    const dadosAtualizados = {
+                        login: dados.login,
+                        nome: dados.nome,
+                        data_nascimento: dados.nascimento,
+                        cpf: dados.cpf,
+                        ativo: dados.ativo,
+                        sobre: dados.sobre,
+                        disponivel: dados.disponivel,
+                        nota_media: dados.nota_media,
+                        foto: srcFotoPerfil
+                    };
+                    setAuth(prevState => ({
+                        ...prevState,
+                        user: { ...prevState.user, ...dadosAtualizados }
+                    }));
+                    alert("Perfil modificado com sucesso.");
+                } else {
+                    alert("Ocorreu um erro");
+                }
+            }
+            if (tipoUsuario == 3) {
+                const response = await editProfissional(dados, infoUser.id);
+                if (response.success) {
+                    const dadosAtualizados = {
+                        login: dados.login,
+                        nome: dados.nome,
+                        data_nascimento: dados.nascimento,
+                        cpf: dados.cpf,
+                        ativo: dados.ativo,
+                        sobre: dados.sobre,
+                        disponivel: dados.disponivel,
+                        nota_media: dados.nota_media,
+                        foto: srcFotoPerfil
+                    };
+                    setAuth(prevState => ({
+                        ...prevState,
+                        user: { ...prevState.user, ...dadosAtualizados }
+                    }));
+                    alert("Perfil modificado com sucesso.");
+                } else {
+                    alert("Ocorreu um erro");
+                }
             }
         } else {
             alert("Erro: E-mail inválido");
         }
+
     };
 
     const handleSelectAvatar = (avatar) => {
@@ -120,52 +161,15 @@ export default ({ onLoad }) => {
                 </div>
             )}
             <div className={styles.content}>
-                <div className={styles.avatarContainer}>
-                    <div className={styles.focusAvatar}>
-                        <img src={srcFotoPerfil} alt="Avatar" onClick={() => setShowFocusImage(true)} />
-                    </div>
-                    <div className={styles.avatarContent} onClick={() => setShowAvatarList(!showAvatarList)}>
-                        <p>Trocar avatar</p>
-                    </div>
-                </div>
-                <div className={styles.inputFieldContainer}>
-                    <div className={styles.inputFieldContainer}>
-
-                        <div className={styles.inputFields}>
-                            <div className={styles.nomeField}>
-                                <p>Nome</p>
-                                <div>
-                                    <input type="text" value={props.nome} onChange={(e) => props.setNome(e.target.value)} />
-                                </div>
-                            </div>
-                            <div className={styles.emailField}>
-                                <p>E-mail</p>
-                                <div>
-                                    <input type="text" value={props.email} onChange={(e) => props.setEmail(e.target.value)} />
-                                </div>
-                            </div>
-                            <div className={styles.nascimentoField}>
-                                <p>Data de nascimento</p>
-                                <div>
-                                    <input type="date" value={props.nascimento} onChange={(e) => props.setNascimento(e.target.value)} />
-                                </div>
-                            </div>
-                            <a className={styles.trocarSenhaField} onClick={() => props.navigate('/passwordRecoveryMailSend')}>
-                                <img src={imgGallery.lockIcon.src} alt={imgGallery.lockIcon.alt} />
-                                <p>Trocar Senha</p>
-                            </a>
-                            <a className={styles.historicoNotasField}>
-                                <img src={imgGallery.lockIcon.src} alt={imgGallery.lockIcon.alt} />
-                                <p>Ver histórico de notas</p>
-                            </a>
-                        </div>
-                    </div>
-                    <div className={styles.buttons}>
-                        <button onClick={handleExclude}>Excluir conta</button>
-                        <button onClick={handleLogout}>Sair da conta</button>
-                        <button onClick={handleUpdate}>Atualizar informações</button>
-                    </div>
-                </div>
+                {
+                    tipoUsuario == 1
+                        ?
+                        <Cliente styles={styles} setShowFocusImage={setShowFocusImage} imgGallery={imgGallery} nome={nome} setNome={setNome} email={email} nascimento={nascimento} setNascimento={setNascimento} setShowAvatarList={setShowAvatarList} srcFotoPerfil={srcFotoPerfil} handleExclude={handleExclude} handleLogout={handleLogout} handleUpdate={handleUpdate} idAvatar={idAvatar} setIdAvatar={setIdAvatar} />
+                        : tipoUsuario == 2 ?
+                            <Estudante styles={styles} setShowFocusImage={setShowFocusImage} imgGallery={imgGallery} nome={nome} setNome={setNome} email={email} nascimento={nascimento} setNascimento={setNascimento} setShowAvatarList={setShowAvatarList} srcFotoPerfil={srcFotoPerfil} handleExclude={handleExclude} handleLogout={handleLogout} handleUpdate={handleUpdate} />
+                            :
+                            <Profissional styles={styles} setShowFocusImage={setShowFocusImage} imgGallery={imgGallery} nome={nome} setNome={setNome} email={email} nascimento={nascimento} setNascimento={setNascimento} setShowAvatarList={setShowAvatarList} srcFotoPerfil={srcFotoPerfil} handleExclude={handleExclude} handleLogout={handleLogout} handleUpdate={handleUpdate} />
+                }
             </div>
         </div>
     );

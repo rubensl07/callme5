@@ -127,7 +127,25 @@ export async function postEstudante(dados) {
     return { success: false, data: null };
   }
 }
+export async function editEstudante(dados,id) {
+  const url = `${link}/cliente/usuario/${id}`
+  const options = {
+    method: 'PUT', 
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(dados)
+  }
 
+  try {
+      const response = await fetch(url,options)
+      const data = await response.json();
+      return { success: response.ok, data }; 
+  } catch (error) {
+    console.error('Erro ao enviar dados: ', error);
+      return { success: false, data: null }; 
+  }
+}
 export async function postProfissional(dados) {
   const url = `${link}/profissional`;
 
@@ -148,7 +166,25 @@ export async function postProfissional(dados) {
     return { success: false, data: null };
   }
 }
+export async function editProfissional(dados,id) {
+  const url = `${link}/cliente/usuario/${id}`
+  const options = {
+    method: 'PUT', 
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(dados)
+  }
 
+  try {
+      const response = await fetch(url,options)
+      const data = await response.json();
+      return { success: response.ok, data }; 
+  } catch (error) {
+    console.error('Erro ao enviar dados: ', error);
+      return { success: false, data: null }; 
+  }
+}
 export async function getAutoajuda() {
   const url = `${link}/autoajudas`
   const response = await fetch(url)

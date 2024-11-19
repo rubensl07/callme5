@@ -98,11 +98,11 @@ const Cliente = forwardRef((props, ref) => {
                     const responseDataDados = responseData.dados                                        
                     const dadosUser = {
                         id: responseData.idCriadoUsuario,
-                        foto: responseDataDados.foto,
-                        id_avatar:responseDataDados.idAvatar,
-                        login:responseDataDados.login,
                         nome:responseDataDados.nome,
+                        login:responseDataDados.login,
                         data_nascimento:responseDataDados.nascimento,
+                        id_avatar:responseDataDados.idAvatar,
+                        foto: responseDataDados.foto,
                         tipo_usuario: 1
                     }                    
                     setAuth({

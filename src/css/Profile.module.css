@@ -18,7 +18,6 @@
     height: 20rem;
     width: 90%;
     display: flex;
-    justify-content: end;
     position: relative;
     background-color: #7FB3FF;
     display: flex;
@@ -27,7 +26,6 @@
     align-self: end;
     border-radius: .5rem;
     justify-content: end;
-
 }
 .focusAvatar{
     height: 14rem;
@@ -35,9 +33,9 @@
     border: 1rem solid #E3EFFF;
     border-radius: 100%;
     position: absolute;
-    left: -7rem;
-    top: 50%;
-    transform: translate(0, -50%);
+    top: -7rem;
+    left: 50%;
+    transform: translate(-50%, 0);
     cursor: pointer;
 }
 .focusAvatar>img{
@@ -60,6 +58,33 @@
     cursor: pointer;
 }
 
+.topContainer{
+    height: 14rem;
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    position: relative;
+    background-color: #7FB3FF;
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+    align-self: end;
+    border-radius: .5rem;
+    justify-content: space-between;
+    padding: 0 10%;
+}
+.topContainer>.sizeField h2{
+    color: white;
+    font-size: 2rem;
+}
+.topContainer>.sizeField p{
+    color: white;
+    font-size: 1.5rem;
+}
+.topContainer>.sizeField span{
+    color: white;
+    font-size: 1.5rem;
+}
 
 
 .inputFieldContainer{
