@@ -8,7 +8,7 @@ export default ((props) => {
 
     return (  
         <>
-            <div className={styles.avatarContainer}>
+            <div className={styles.topContainerOuvinte}>
                 <div className={styles.focusAvatar}>
                     <img src={props.srcFotoPerfil} alt="Avatar" onClick={() => props.setShowFocusImage(true)} />
                 </div>
@@ -41,8 +41,8 @@ export default ((props) => {
                         <p>Trocar Senha</p>
                     </a>
                     <a className={styles.historicoNotasField}>
-                        <img src={imgGallery.lockIcon.src} alt={imgGallery.lockIcon.alt} />
-                        <p>Ver histórico de notas</p>
+                    <img src={imgGallery.noteHistory.src} alt={imgGallery.noteHistory.alt} />
+                    <p>Ver histórico de notas</p>
                     </a>
                 </div>                    
                 <div className={styles.buttons}>

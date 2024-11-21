@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from '../css/Profile.module.css';
 import Sidebar from "../components/Sidebar.jsx";
 import imgGallery from '../importsGallery.json';
-import { editCliente, editEstudante,editProfissional, getAvatares, validarEmail } from "../../funcoes.js";
+import { customizeAlert, editCliente, editEstudante,editProfissional, getAvatares, validarEmail } from "../../funcoes.js";
 import AvatarList from "../components/avatarList.jsx";
 import ImageFocus from "../components/imageFocus.jsx";
 import { AuthContext } from "../../Contexts/AuthContext";
@@ -13,6 +13,9 @@ import Profissional from "../components/ProfileProfissional.jsx"
 
 
 export default ({ onLoad }) => {
+    useEffect(() => {
+        document.title = "Perfil";
+    }, []);
     const navigate = useNavigate();
     const { auth, setAuth } = useContext(AuthContext);
     const infoUser = auth.user;
@@ -56,7 +59,7 @@ export default ({ onLoad }) => {
     const confirmDelete = async () => {
         setShowDeleteConfirmation(false);
         handleLogout();
-        alert("Conta excluída com sucesso.");
+        customizeAlert({mensagem:"Conta excluída com sucesso", code:1})
     };
 
     const cancelDelete = () => {
@@ -79,9 +82,9 @@ export default ({ onLoad }) => {
                         ...prevState,
                         user: { ...prevState.user, ...dadosAtualizados }
                     }));
-                    alert("Perfil modificado com sucesso.");
+                    customizeAlert({mensagem:"Perfil modificado com sucesso.", code:1})
                 } else {
-                    alert("Ocorreu um erro");
+                    customizeAlert({mensagem:"Ocorreu um erro", code:2})
                 }
             }
             if (tipoUsuario == 2) {
@@ -102,9 +105,9 @@ export default ({ onLoad }) => {
                         ...prevState,
                         user: { ...prevState.user, ...dadosAtualizados }
                     }));
-                    alert("Perfil modificado com sucesso.");
+                    customizeAlert({mensagem:"Perfil modificado com sucesso", code:1})
                 } else {
-                    alert("Ocorreu um erro");
+                    customizeAlert({mensagem:"Ocorreu um erro", code:2})
                 }
             }
             if (tipoUsuario == 3) {
@@ -125,15 +128,14 @@ export default ({ onLoad }) => {
                         ...prevState,
                         user: { ...prevState.user, ...dadosAtualizados }
                     }));
-                    alert("Perfil modificado com sucesso.");
+                    customizeAlert({mensagem:"Perfil modificado com sucesso", code:1})
                 } else {
-                    alert("Ocorreu um erro");
+                    customizeAlert({mensagem:"Ocorreu um erro", code:2})
                 }
             }
         } else {
-            alert("Erro: E-mail inválido");
+            customizeAlert({mensagem:"E-mail inválido", code:2})            
         }
-
     };
 
     const handleSelectAvatar = (avatar) => {

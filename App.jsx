@@ -20,8 +20,7 @@ const App = () => {
   // Private Route Wrapper
   const PrivateRoute = ({ children }) => {
     return auth.isAuthenticated ? children : <Navigate to="/login" />;
-  };  
-    
+  };
 
   return (
     <BrowserRouter>

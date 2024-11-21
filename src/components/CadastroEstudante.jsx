@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import imgGallery from '../importsGallery.json';
 import { postEstudante, validarEmail } from '/funcoes';
 import { AuthContext } from '../../Contexts/AuthContext';
+import { customizeAlert } from '../../funcoes';
 
 const Estudante = forwardRef((props, ref) => {
     const { styles, checkboxState } = props;
@@ -22,7 +23,6 @@ const Estudante = forwardRef((props, ref) => {
     const [foto, setFoto] = useState(null);
     const [declaracaoEscolaridade, setDeclaracaoEscolaridade] = useState(null);
     const [cpf, setCpf] = useState('');
-    const [isLoading, setIsLoading] = useState(true);
 
 
     let showPass = false;
@@ -50,63 +50,68 @@ const Estudante = forwardRef((props, ref) => {
 
     const handleRegister = async () => {
         try {
+            let validateStatus = true
+            let mensagemErro = 'Ocorreu um erro'
 
-            if ((!login || !nome || !nascimento || !senha || !confirmPassword || !cpf)) {
-                alert("Todos os campos devem ser preenchidos")
+            if (validateStatus && (!login || !nome || !nascimento || !senha || !confirmPassword)) {
+                validateStatus = false;
+                mensagemErro = "Todos os campos devem ser preenchidos"
             }
-            if (!validarEmail(login)) {
-                alert("E-mail inválido")
-                return;
+            if (validateStatus && !validarEmail(login)) {
+                validateStatus = false;
+                mensagemErro = "E-mail inválido"
             }
-            if (senha !== confirmPassword) {
-                alert("As senhas não coincidem!");
-                return;
+            if (validateStatus && senha !== confirmPassword) {
+                validateStatus = false;
+                mensagemErro = "As senhas não coincidem!"
             }
-            if (!(/\d/.test(senha))) {
-                alert("Senha deve conter um número");
-                return;
+            if (validateStatus && !(/\d/.test(senha))) {
+                validateStatus = false;
+                mensagemErro = "Senha deve conter um número"
             }
-            if (!(/[a-z]/.test(senha))) {
-                alert("Senha deve conter uma letra minúscula");
-                return;
+            if (validateStatus && !(/[a-z]/.test(senha))) {
+                validateStatus = false;
+                mensagemErro = "Senha deve conter uma letra minúscula"
             }
-            if (!(/[A-Z]/.test(senha))) {
-                alert("Senha deve conter uma letra maiúscula");
-                return;
+            if (validateStatus && !(/[A-Z]/.test(senha))) {
+                validateStatus = false;
+                mensagemErro = "Senha deve conter uma letra maiúscula"
             }
-            if (!(/[^A-Za-z0-9]/.test(senha))) {
-                alert("Senha deve conter um caractere especial");
-                return;
+            if (validateStatus && !(/[^A-Za-z0-9]/.test(senha))) {
+                validateStatus = false;
+                mensagemErro = "Senha deve conter um caractere especial"
             }
-            if (senha.length < 8) {
-                alert("Senha muito curta");
-                return;
+            if (validateStatus && senha.length < 8) {
+                validateStatus = false;
+                mensagemErro = "Senha muito curta"
             }
-            if (senha.length > 64) {
-                alert("Senha muito longa");
-                return;
+            if (validateStatus && senha.length > 64) {
+                validateStatus = false;
+                mensagemErro = "Senha muito longa"
             }
-            if (cpf.length != 11) {
-                alert("CPF recusado");
-                return;
+            if (validateStatus && nascimento.length !== 10) {
+                validateStatus = false;
+                mensagemErro = "Nascimento Indefinido"
             }
-            if (nascimento.length !== 10) {
-                alert("Nascimento Indefinido");
-                return;
+            if (validateStatus && cpf.length != 11) {
+                validateStatus = false;
+                mensagemErro = "CPF recusado"
             }
-            if ((!foto)) {
-                alert("Foto indefinida");
-                return;
+            if (validateStatus && !foto) {
+                validateStatus = false;
+                mensagemErro = "Foto indefinida"
             }
-            if ((!declaracaoEscolaridade)) {
-                alert("Declaração de escolaridade indefinida");
-                return;
+            if (validateStatus && !declaracaoEscolaridade) {
+                validateStatus = false;
+                mensagemErro = "Declaração de escolaridade indefinida"
             }
-            if (!checkboxState) {
-                alert("Para se registrar na aplicação é necessário aceitar os termos");
-                return;
+            if (validateStatus && !checkboxState) {
+                validateStatus = false;
+                mensagemErro = "Para se registrar na aplicação é necessário aceitar os termos"
             }
-                setIsLoading(true);
+            if (!validateStatus) {
+                customizeAlert({ mensagem: mensagemErro, code: 3 })
+            } else {
                 const formData = new FormData();
                 formData.append('nome', nome);
                 formData.append('login', login);
@@ -141,6 +146,7 @@ const Estudante = forwardRef((props, ref) => {
                     } else {
                         alert(`Erro: Falha ao cadastrar.`);
                     }
+                }
             }
         } catch (error) {
             alert(`Erro: Falha ao cadastrar.`);
@@ -164,10 +170,9 @@ const Estudante = forwardRef((props, ref) => {
             <div><p>Data de nascimento</p><input type="date" value={nascimento} onChange={(e) => setNascimento(e.target.value)} /></div>
             <div className={styles.fileInput}>
                 <p>Foto</p>
-                
-                <input id='fotoFileInput'  name="foto" type="file" accept="image/*" onChange={handleFotoChange} />
+                <input id='fotoFileInput' name="foto" type="file" accept="image/*" onChange={handleFotoChange} />
                 <label htmlFor="fotoFileInput">
-                    <img src={imgGallery.uploadIcon.src} alt={imgGallery.uploadIcon.src} />
+                    <img src={!foto ? imgGallery.uploadUnselectedIcon.src : imgGallery.uploadSelectedIcon.src} alt={imgGallery.uploadUnselectedIcon.src} />
                 </label>
             </div>
             <div><p>CPF</p><input type="number" value={cpf} onChange={(e) => setCpf(e.target.value)} /></div>
@@ -175,7 +180,7 @@ const Estudante = forwardRef((props, ref) => {
                 <p>Comprovante de escolaridade</p>
                 <input id='declaracaoEscolaridadeFileInput' name="declaracaoEscolaridade" type="file" accept="application/pdf" onChange={handleDeclaracaoEscolaridadeChange} />
                 <label htmlFor="declaracaoEscolaridadeFileInput">
-                    <img src={imgGallery.uploadIcon.src} alt={imgGallery.uploadIcon.src} />
+                    <img src={!declaracaoEscolaridade ? imgGallery.uploadUnselectedIcon.src : imgGallery.uploadSelectedIcon.src} alt={imgGallery.uploadUnselectedIcon.src} />
                 </label>
             </div>
         </div>

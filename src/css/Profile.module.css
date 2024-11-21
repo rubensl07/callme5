@@ -1,7 +1,6 @@
 .container{
     display: flex;
     height: 100vh;
-    background-color: #E3EFFF;
 }
 .content{
     display: flex;
@@ -12,20 +11,14 @@
     flex-grow: 1;
     gap: 2rem;
 }
-
-
-.avatarContainer{
-    height: 20rem;
-    width: 90%;
+.topContainerCliente,.topContainerOuvinte{
     display: flex;
-    position: relative;
     background-color: #7FB3FF;
-    display: flex;
-    align-items: center;
     padding: 0 2rem;
-    align-self: end;
     border-radius: .5rem;
+    position: relative;
     justify-content: end;
+    align-items: center;
 }
 .focusAvatar{
     height: 14rem;
@@ -33,16 +26,27 @@
     border: 1rem solid #E3EFFF;
     border-radius: 100%;
     position: absolute;
+    cursor: pointer;
+}
+.topContainerCliente{
+    height: 20rem;
+    width: 90%;
+}
+.topContainerOuvinte{
+    height: 12rem;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 10%;
+}
+.topContainerCliente>.focusAvatar{
+    left: -7rem;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+.topContainerOuvinte>.focusAvatar{
     top: -7rem;
     left: 50%;
     transform: translate(-50%, 0);
-    cursor: pointer;
-}
-.focusAvatar>img{
-    height: 100%;
-    width: 100%;
-    border-radius: 100%;
-    border: .5rem solid #1F55C6;
 }
 .avatarContent{
     background-color: #5A8AD6;
@@ -57,36 +61,27 @@
     padding: 0 5%;
     cursor: pointer;
 }
-
-.topContainer{
-    height: 14rem;
+.focusAvatar>img{
+    height: 100%;
     width: 100%;
-    display: flex;
-    justify-content: end;
-    position: relative;
-    background-color: #7FB3FF;
-    display: flex;
-    align-items: center;
-    padding: 0 2rem;
-    align-self: end;
-    border-radius: .5rem;
-    justify-content: space-between;
-    padding: 0 10%;
+    border-radius: 100%;
+    border: .5rem solid #1F55C6;
 }
-.topContainer>.sizeField h2{
+.topContainerOuvinte>.sizeField h2{
     color: white;
     font-size: 2rem;
 }
-.topContainer>.sizeField p{
-    color: white;
+.topContainerOuvinte>.sizeField p{
+    display: flex;
+    flex-direction: row;
+    gap: .5rem;
+    color: #586BAF;
     font-size: 1.5rem;
 }
-.topContainer>.sizeField span{
-    color: white;
+.topContainerOuvinte>.sizeField span{
+    color: #1F55C6;
     font-size: 1.5rem;
 }
-
-
 .inputFieldContainer{
     width: 100%;
     gap: 2rem;
@@ -133,6 +128,7 @@
     cursor: pointer;
     background-color: #2755B2;
     justify-content: center;
+    gap: 1rem;
 }
 .inputFields>div>p{
     border-radius: 0 32px 32px 0;

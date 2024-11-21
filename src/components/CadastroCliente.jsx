@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import imgGallery from '../importsGallery.json';
 import { postCliente, validarEmail } from '/funcoes';
 import {AuthContext} from '../../Contexts/AuthContext';
+import { customizeAlert } from '../../funcoes';
 
 const Cliente = forwardRef((props, ref) => {
     const { styles, checkboxState, setShowAvatarList, avatar} = props;
@@ -38,60 +39,63 @@ const Cliente = forwardRef((props, ref) => {
     }));
 
     const handleRegister = async () => {
-        let validateStatus = true;
+        try {
+        let validateStatus = true
+        let mensagemErro = 'Ocorreu um erro'
 
         if(validateStatus && (!login || !nome || !nascimento || !senha || !confirmPassword)){
-            validateStatus = false;
-            alert("Todos os campos devem ser preenchidos")
+            validateStatus = false;            
+            mensagemErro = "Todos os campos devem ser preenchidos"
         }
         if(validateStatus && !validarEmail(login)){                 
             validateStatus = false;
-            alert("E-mail inválido")
+            mensagemErro = "E-mail inválido"
         }
         if (validateStatus && senha !== confirmPassword) {
             validateStatus = false;
-            alert("As senhas não coincidem!");
+            mensagemErro = "As senhas não coincidem!"
         }
         if(validateStatus && !(/\d/.test(senha))){
             validateStatus = false;
-            alert("Senha deve conter um número");
+            mensagemErro = "Senha deve conter um número"
         }
         if(validateStatus && !(/[a-z]/.test(senha))){
             validateStatus = false;
-            alert("Senha deve conter uma letra minúscula");
+            mensagemErro = "Senha deve conter uma letra minúscula"
         }
         if(validateStatus && !(/[A-Z]/.test(senha))){
             validateStatus = false;
-            alert("Senha deve conter uma letra maiúscula");
+            mensagemErro = "Senha deve conter uma letra maiúscula"
         }
         if(validateStatus && !(/[^A-Za-z0-9]/.test(senha))){
             validateStatus = false;
-            alert("Senha deve conter um caractere especial");
+            mensagemErro = "Senha deve conter um caractere especial"
         }
         if (validateStatus && senha.length < 8) {
             validateStatus = false;
-            alert("Senha muito curta");
+            mensagemErro = "Senha muito curta"
         }
         if (validateStatus && senha.length > 64) {
             validateStatus = false;
-            alert("Senha muito longa");
+            mensagemErro = "Senha muito longa"
         }
         if (validateStatus && nascimento.length !== 10) {
             validateStatus = false;
-            alert("Nascimento Indefinido");
+            mensagemErro = "Nascimento Indefinido"
         }
         if (validateStatus && (avatar.id ==null ||isNaN(avatar.id))) {
             validateStatus = false;
-            alert("Avatar Indefinido");
+            mensagemErro = "Avatar Indefinido"
         }
         if (validateStatus && !checkboxState) {
             validateStatus = false;
-            alert("Para se registrar na aplicação é necessário aceitar os termos");
+            mensagemErro = "Para se registrar na aplicação é necessário aceitar os termos"
         }
 
-        try {
-            const dados = { nome, login, senha, nascimento, idAvatar:avatar.id };
-            if (validateStatus) {
+        if (!validateStatus){
+            customizeAlert({mensagem:mensagemErro,code:3})
+        } else {
+                const dados = { nome, login, senha, nascimento, idAvatar:avatar.id };
                 let response = await postCliente(dados);
                 if (response?.success) {
                     const responseData = response.data

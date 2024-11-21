@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import { deleteAutoajuda, editAutoajuda, getAutoajuda } from "../../funcoes";
+import { customizeAlert, deleteAutoajuda, editAutoajuda, getAutoajuda } from "../../funcoes";
 import styles from "../css/Autoajuda.module.css";
 import Sidebar from '../components/Sidebar';
 
@@ -36,7 +36,7 @@ const AjudaScreen = ({ onLoad }) => {
             if(result){
                 location.reload()
             } else {
-                alert("Ocorreu um erro")
+                customizeAlert({mensagem:"Ocorreu um erro", code:2})
             }
         } else {
             console.error("ID não encontrado!");
@@ -61,7 +61,7 @@ const AjudaScreen = ({ onLoad }) => {
             if(result){
                 location.reload()
             } else {
-                alert("Ocorreu um erro")
+                customizeAlert({mensagem:"Ocorreu um erro", code:2})
             }
         } else {
             console.error("ID não encontrado!");

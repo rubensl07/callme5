@@ -2,11 +2,13 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import styles from '../css/Login.module.css';
 import imgGallery from '../importsGallery.json';
-import { getUsuario, validateLogin } from "../../funcoes";
+import { customizeAlert, getUsuario, validateLogin } from "../../funcoes";
 import CallmeLogo from "../components/CallmeLogo";
 import { AuthContext } from "../../Contexts/AuthContext";
 
+
 export default () => {
+
   const { setAuth } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -25,7 +27,8 @@ export default () => {
 
     if (!login || !senha) {
       validateStatus = false;
-      alert("Campos vazios");
+      customizeAlert({mensagem:"Campos Vazios",code:3});
+      return;
     }
 
     if (validateStatus) {
@@ -33,11 +36,11 @@ export default () => {
       const code = response?.data?.code;
 
       if (code === 0) {
-        alert("Essa conta não existe");
+        customizeAlert({mensagem:"Essa conta não existe",code:3});
         return;
       }
       if (code === 2) {
-        alert("Senha incorreta");
+        customizeAlert({mensagem:"Senha Incorreta",code:3});
         return;
       }
 
@@ -49,7 +52,6 @@ export default () => {
           user: dadosUser
         });        
         navigate('/perfil'); 
-        alert("Logado com sucesso");
       }
     }
   };

@@ -2,23 +2,24 @@ export default ((props) => {
     const styles = props.styles
     const imgGallery = props.imgGallery
     const email = props.email
-    const nome= props.nome
+    const nome = props.nome
     const nascimento = props.nascimento
 
-    return (  
+    return (
         <>
-            <div className={styles.topContainer}>
+            <div className={styles.topContainerOuvinte}>
                 <div className={styles.focusAvatar}>
                     <img src={props.srcFotoPerfil} alt="Avatar" onClick={() => props.setShowFocusImage(true)} />
                 </div>
                 <div className={styles.sizeField}>
                     <h2>
-                        Murilo 
+                        Murilo
                     </h2>
                     <p>
-                    Professor: <span>
-                    Leonid
+                        <span>
+                            Professor: 
                         </span>
+                        Leonid
                     </p>
                 </div>
                 <div className={styles.sizeField}>
@@ -26,7 +27,10 @@ export default ((props) => {
                         CPF
                     </h2>
                     <p>
-                    Duração: 260
+                        <span>
+                            Duração:
+                        </span>
+                        260
                     </p>
                 </div>
             </div>
@@ -55,14 +59,14 @@ export default ((props) => {
                         <p>Trocar Senha</p>
                     </a>
                     <a className={styles.historicoNotasField}>
-                        <img src={imgGallery.lockIcon.src} alt={imgGallery.lockIcon.alt} />
-                        <p>Ver histórico de notas</p>
+                    <img src={imgGallery.noteHistory.src} alt={imgGallery.noteHistory.alt} />
+                    <p>Ver histórico de notas</p>
                     </a>
-                </div>                    
+                </div>
                 <div className={styles.buttons}>
                     <button onClick={props.handleExclude}>Excluir conta</button>
                     <button onClick={props.handleLogout}>Sair da conta</button>
-                    <button onClick={()=>props.handleUpdate(2,{login:email,nome,nascimento,})}>Atualizar informações</button>
+                    <button onClick={() => props.handleUpdate(2, { login: email, nome, nascimento, })}>Atualizar informações</button>
                 </div>
             </div>
         </>

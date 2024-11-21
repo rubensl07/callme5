@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import styles from '../css/PasswordRecovery.module.css';
 import imgGallery from '../importsGallery.json'
-import { enviarPasswordRecovery, validarSenha } from "../../funcoes";
+import { customizeAlert, enviarPasswordRecovery, validarSenha } from "../../funcoes";
 import CallmeLogo from "../components/CallmeLogo";
 
 export default () => {
@@ -31,16 +31,17 @@ export default () => {
       };
       if (validateStatus && (dados.codigo == null || dados.codigo == undefined || dados.codigo == '' ||dados.senha == null || dados.senha == undefined || dados.senha == '')) {
         validateStatus = false;
-        alert("Campos vazios");
+        customizeAlert({mensagem:"Campos vazios", code:3})
       } else {
+        // if(cal)
         if(resultValidatePassword){
           if (validateStatus) {
             response = await enviarPasswordRecovery(dados);
-            alert("Senha alterada com sucesso");
+            customizeAlert({mensagem:"Senha alterada com sucesso", code:1})
             navigate('/')
           }
         } else {
-          alert("Sua senha não atende aos parâmetros estabelecidos pela aplicação")
+          customizeAlert({mensagem:"Sua senha não atende aos parâmetros estabelecidos pela aplicação", code:3})
         }
   
       }

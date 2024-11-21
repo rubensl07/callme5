@@ -1,15 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
-import Cliente from "../components/Cliente";
-import Estudante from "../components/Estudante";
-import Profissional from "../components/Profissional";
+import Cliente from "../components/CadastroCliente";
+import Estudante from "../components/CadastroEstudante";
+import Profissional from "../components/CadastroProfissional";
 import styles from '../css/Cadastro.module.css'
 import imgGallery from '../importsGallery.json'
 import AvatarList from "../components/avatarList";
 import { getAvatares } from "../../funcoes";
-
+import CallmeLogo from "../components/CallmeLogo";
 
 
 export default ({onLoad}) => {
+
   const [checkboxState, setCheckboxState] = useState(false);
   const [showAvatarList,setShowAvatarList] = useState(false)
   const [listaAvatares, setListaAvatares] = useState([]);
@@ -86,8 +87,8 @@ const handleSelectAvatar = (avatar) => {
       <div className={styles.content}>
         <div className={styles.topSide}>
           <header>
-            <img src={imgGallery.logoText.src} alt={imgGallery.logoText.alt} />
-            <h2>Para quando o mundo parecer turbulento</h2>
+          <CallmeLogo noText={false} />
+          <h2>Para quando o mundo parecer turbulento</h2>
           </header>
           <ul>
             <li onClick={(e) => changeRole(1, e)} className={`${styles.selecionado}`}>Quero desabafar</li>
@@ -98,7 +99,7 @@ const handleSelectAvatar = (avatar) => {
 
         <main>
           {tipoUsuarioCriado === 1 ? (
-            <Cliente avatar={avatar} ref={clienteRef} checkboxState = {checkboxState} styles={styles} setShowAvatarList={setShowAvatarList}/>
+            <Cliente avatar={avatar} ref={clienteRef} checkboxState = {checkboxState} styles={styles} showAvatarList={showAvatarList} setShowAvatarList={setShowAvatarList}/>
           ) : tipoUsuarioCriado === 2 ? (
             <Estudante ref={estudanteRef} checkboxState = {checkboxState} styles={styles} />
           ) : (

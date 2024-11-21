@@ -15,6 +15,10 @@
         "src": "/src/img/offshowpass.png",
         "alt": "Ocultar senha"
     },
+    "noteHistory":{
+        "src": "/src/img/note_history.png",
+        "alt": "Histórico Notas"
+    },
     "lockIcon":{
         "src": "/src/img/lock.png",
         "alt": "Cadeado"
@@ -23,9 +27,17 @@
         "src": "/src/img/upload.png",
         "alt": "Upload"
     },
+    "uploadSelectedIcon":{
+        "src": "/src/img/upload_selected.png",
+        "alt": "Upload"
+    },
+    "uploadUnselectedIcon":{
+        "src": "/src/img/upload_unselected.png",
+        "alt": "Upload"
+    },
     "nav":{
         "autoajuda":{
-            "src": "./src/img/autoajuda.png",
+            "src": "/src/img/autoajuda.png",
             "alt": "autoajuda"
         },
         "estatistica":{

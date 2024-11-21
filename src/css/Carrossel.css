@@ -7,11 +7,9 @@ body {
     overflow: hidden;
     background-color: blue;
 }
-
 * {
     box-sizing: border-box;
 }
-
 .carousel {
     position: relative;
     width: 23rem;

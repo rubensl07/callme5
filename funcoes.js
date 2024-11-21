@@ -295,3 +295,41 @@ export function validarEmail(email) {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;  
   return regex.test(email);
 }
+
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+const MySwal = withReactContent(Swal)
+
+export function customizeAlert(data){
+  let titulo = ''
+  let icone = ''
+  if(data.code==1){
+    titulo = "Sucesso"
+    icone = "success"
+  }
+  if(data.code==2){
+    titulo = "Erro"
+    icone = "error"	
+  }
+  if(data.code==3){
+    titulo = "Aviso"
+    icone = "warning"	
+  }
+  if(data.code==4){
+    titulo = "Dica"
+    icone = "info"	
+  }
+  if(data.code==5){
+    titulo = "???"
+    icone = "question"	
+  }
+  Swal.fire({
+    title: titulo || "Título",
+    text: data.mensagem || "Text",
+    icon: icone || "question"
+  });
+}
+
+export function analisarErros(tipoUsuario){
+  
+}

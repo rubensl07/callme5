@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import styles from '../css/PasswordRecovery.module.css';
 import imgGallery from '../importsGallery.json'
-import { enviarPasswordRecovery, validarEmail } from "../../funcoes";
+import { customizeAlert, enviarPasswordRecovery, validarEmail } from "../../funcoes";
 import CallmeLogo from "../components/CallmeLogo";
 // import { validateLogin } from "../../funcoes";
 
@@ -20,11 +20,11 @@ export default () => {
     let validateStatus = true    
     if (validateStatus && (dados.email == null || dados.email == undefined || dados.email == '')) {
         validateStatus = false
-        alert("Campos vazios");
-    }
+        customizeAlert({mensagem:"Campos vazios", code:3})
+      }
     if (validateStatus && !validarEmail(dados.email)){
       validateStatus = false
-      alert("E-mail inválido")
+      customizeAlert({mensagem:"E-mail inválido", code:3})
     }
     if (validateStatus) {
         response = await enviarPasswordRecovery(dados)
